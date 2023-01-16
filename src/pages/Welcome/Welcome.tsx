@@ -28,6 +28,7 @@ function Welcome() {
         <Image alt="mui" src={muiLogo} />
         <Image alt="recoil" src={recoilLogo} />
         <Image alt="pwa" src={pwaLogo} />
+        Test
       </FullSizeCenteredFlexBox>
     </>
   );

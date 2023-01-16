@@ -1,11 +1,10 @@
 {
-  "name": "react-pwa",
-  "version": "2.1.0",
-  "description": "Starter kit for modern web applications",
-  "homepage": "https://react-pwa.surenatoyan.com/",
+  "name": "pantryscan",
+  "version": "0.0.1",
+  "description": "Pantry products scan application",
   "repository": {
     "type": "git",
-    "url": "https://github.com/suren-atoyan/react-pwa.git"
+    "url": "https://github.com/a/react-pwa.git"
   },
   "bugs": {
     "url": "https://github.com/suren-atoyan/react-pwa/issues",
@@ -20,41 +19,42 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/icons-material": "^5.10.6",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
     "@mui/lab": "5.0.0-alpha.100",
-    "@mui/material": "^5.10.6",
-    "@mui/system": "^5.10.6",
-    "@mui/utils": "^5.10.6",
+    "@mui/material": "^5.11.4",
+    "@mui/system": "^5.11.4",
+    "@mui/utils": "^5.11.2",
     "is-mobile": "^3.1.1",
-    "notistack": "^2.0.5",
+    "notistack": "^2.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
     "react-helmet-async": "^1.3.0",
     "react-hotkeys-hook": "^3.4.7",
-    "react-router-dom": "^6.4.1",
-    "recoil": "^0.7.5"
+    "react-router-dom": "^6.6.2",
+    "recoil": "^0.7.6"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
-    "@types/node": "^18.7.21",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.38.0",
-    "@typescript-eslint/parser": "^5.38.0",
-    "@vitejs/plugin-react": "^2.1.0",
-    "eslint": "^8.24.0",
-    "eslint-plugin-react": "^7.31.8",
+    "@trivago/prettier-plugin-sort-imports": "^3.4.0",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "@vitejs/plugin-react": "^2.2.0",
+    "eslint": "^8.32.0",
+    "eslint-plugin-react": "^7.32.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "https-localhost": "^4.7.1",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
     "prettier": "2.7.1",
-    "typescript": "^4.8.3",
-    "vite": "^3.1.3",
-    "vite-plugin-pwa": "^0.13.1"
+    "typescript": "^4.9.4",
+    "vite": "^3.2.5",
+    "vite-plugin-pwa": "^0.13.3",
+    "workbox-window": "^6.5.4"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
@@ -63,16 +63,5 @@
     "src/**/*.{js,jsx,ts,tsx,json}": [
       "eslint --max-warnings=0"
     ]
-  },
-  "author": {
-    "name": "Suren Atoyan",
-    "email": "contact@surenatoyan.com",
-    "url": "http://surenatoyan.com/"
-  },
-  "keywords": [
-    "react",
-    "pwa",
-    "starter-kit",
-    "vite"
-  ]
+  }
 }

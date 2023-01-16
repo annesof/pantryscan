@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
+import { Alert, Button } from '@mui/material';
 
 import type { SnackbarKey } from 'notistack';
 import { useRegisterSW } from 'virtual:pwa-register/react';

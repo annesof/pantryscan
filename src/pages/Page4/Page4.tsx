@@ -13,7 +13,7 @@ function Page4() {
       <FullSizeCenteredFlexBox flexDirection="column">
         <Typography variant="h3">Page 4</Typography>
         <Button
-          to={`/${Math.random().toString()}`}
+          to={`/5`}
           component={Link}
           variant="outlined"
           sx={{ mt: 4 }}
