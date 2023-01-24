@@ -1,8 +1,15 @@
+import { ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { defaultMetaTags, title as appTitle } from '@/config';
 
-import type { MetaProps } from './types';
+type MetaProps = {
+  description?: string;
+  meta?: Array<{ name: string; content: string }>;
+  title?: string;
+  image?: string;
+  children?: ReactNode;
+};
 
 function Meta({
   description = defaultMetaTags.description,

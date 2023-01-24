@@ -2,6 +2,7 @@ import Meta from '@/components/Meta';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
 import useOrientation from '@/hooks/useOrientation';
 
+import { styled } from '@mui/system';
 import muiLogo from './logos/mui.svg';
 import pwaLogo from './logos/pwa.svg';
 import reactLogo from './logos/react_ed.svg';
@@ -9,7 +10,12 @@ import recoilLogo from './logos/recoil.svg';
 import rrLogo from './logos/rr.svg';
 import tsLogo from './logos/ts.svg';
 import viteLogo from './logos/vite.svg';
-import { Image } from './styled';
+
+const Image = styled('img')({
+  width: '10%',
+  height: '10%',
+  margin: 4,
+});
 
 function Welcome() {
   const isPortrait = useOrientation();
