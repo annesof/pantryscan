@@ -10,6 +10,7 @@ import HotKeys from '@/sections/HotKeys';
 import Notifications from '@/sections/Notifications';
 import Sidebar from '@/sections/Sidebar';
 import SW from '@/sections/SW';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 function App() {
   return (
@@ -18,11 +19,19 @@ function App() {
       <Notifications />
       <HotKeys />
       <SW />
-      <BrowserRouter>
-        <Header />
-        <Sidebar />
-        <Pages />
-      </BrowserRouter>
+      <Auth0Provider
+        domain="dev-0frjhnjrzz30fju5.us.auth0.com"
+        clientId="yyxl1xtjt4SLzp0zjezvuBfg33DTBOF1"
+        authorizationParams={{
+          redirect_uri: window.location.origin,
+        }}
+      >
+        <BrowserRouter>
+          <Header />
+          <Sidebar />
+          <Pages />
+        </BrowserRouter>
+      </Auth0Provider>
     </>
   );
 }

@@ -19,7 +19,7 @@ import useHotKeysDialog from '@/store/hotkeys';
 import useNotifications from '@/store/notifications';
 import useSidebar from '@/store/sidebar';
 import useTheme from '@/store/theme';
-
+import { useAuth0 } from '@auth0/auth0-react';
 import { HotKeysButton } from './styled';
 
 function Header() {
@@ -27,6 +27,8 @@ function Header() {
   const [, themeActions] = useTheme();
   const [, notificationsActions] = useNotifications();
   const [, hotKeysDialogActions] = useHotKeysDialog();
+
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   function showNotification() {
     notificationsActions.push({
@@ -67,6 +69,18 @@ function Header() {
             </Button>
           </FlexBox>
           <FlexBox>
+            {!isAuthenticated && <button onClick={() => loginWithRedirect()}>Log In</button>}
+            {isAuthenticated && (
+              <>
+                {user.email}
+                <button
+                  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+                >
+                  Log Out
+                </button>
+              </>
+            )}
+            <Divider orientation="vertical" flexItem />
             <FlexBox>
               <Tooltip title="Hot keys" arrow>
                 <HotKeysButton

@@ -17,8 +17,8 @@ const routes: Routes = {
   },
   [Pages.Page1]: {
     component: asyncComponentLoader(() => import('@/pages/Page1')),
-    path: '/page-1',
-    title: 'Page 1',
+    path: '/page-1-secured',
+    title: 'Secured Page',
     icon: GitHubIcon,
   },
   [Pages.Page2]: {
