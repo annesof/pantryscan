@@ -1,4 +1,3 @@
-import GitHubIcon from '@mui/icons-material/GitHub';
 import ThemeIcon from '@mui/icons-material/InvertColors';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
@@ -14,12 +13,13 @@ import {
 } from '@mui/material';
 
 import { FlexBox } from '@/components/styled';
-import { repository, title } from '@/config';
 import useNotifications from '@/store/notifications';
 import useSidebar from '@/store/sidebar';
 import useTheme from '@/store/theme';
+import bar from './big_back.jpg';
+import Logo from './Logo.svg';
 
-function Header() {
+export function Header() {
   const [, sidebarActions] = useSidebar();
   const [, themeActions] = useTheme();
   const [, notificationsActions] = useNotifications();
@@ -45,7 +45,12 @@ function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="transparent" elevation={1} position="static">
+      <AppBar
+        color="transparent"
+        elevation={10}
+        position="fixed"
+        sx={{ background: `url(${bar})  center center fixed`, backgroundSize: 'cover' }}
+      >
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
             <IconButton
@@ -59,16 +64,10 @@ function Header() {
               <MenuIcon />
             </IconButton>
             <Button onClick={showNotification} color="info">
-              {title}
+              <img src={Logo} alt="icon" />
             </Button>
           </FlexBox>
           <FlexBox>
-            <Divider orientation="vertical" flexItem />
-            <Tooltip title="It's open source" arrow>
-              <IconButton color="info" size="large" component="a" href={repository} target="_blank">
-                <GitHubIcon />
-              </IconButton>
-            </Tooltip>
             <Divider orientation="vertical" flexItem />
             <Tooltip title="Switch theme" arrow>
               <IconButton color="info" edge="end" size="large" onClick={themeActions.toggle}>
@@ -81,5 +80,3 @@ function Header() {
     </Box>
   );
 }
-
-export default Header;

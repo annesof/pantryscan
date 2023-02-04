@@ -10,7 +10,7 @@ import { Pages, Routes } from './types';
 
 const routes: Routes = {
   [Pages.Welcome]: {
-    component: asyncComponentLoader(() => import('@/pages/Welcome')),
+    component: asyncComponentLoader(() => import('@/pages/HomePage/Welcome')),
     path: '/',
     title: 'Welcome',
     icon: HomeIcon,

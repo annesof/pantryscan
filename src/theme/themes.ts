@@ -16,6 +16,18 @@ const sharedTheme = {
         disableRipple: true,
       },
     },
+    MuiBottomNavigation: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#08B7C4',
+        },
+      },
+    },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        root: { '&.Mui-selected': { color: '#FFFFF' } },
+      },
+    },
     MuiDivider: {
       styleOverrides: {
         vertical: {
@@ -44,8 +56,9 @@ const themes: Record<Themes, ThemeOptions> = {
         paper: '#fff',
       },
       primary: {
-        main: '#3f51b5',
+        main: '#08B7C4',
       },
+      color: '#111',
     },
   }),
 
@@ -53,11 +66,11 @@ const themes: Record<Themes, ThemeOptions> = {
     palette: {
       mode: 'dark',
       background: {
-        default: '#111',
+        default: '#fafafa',
         paper: '#171717',
       },
       primary: {
-        main: '#333',
+        main: '#08B7C4',
       },
     },
   }),
