@@ -7,6 +7,14 @@ import manifest from './manifest.json';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      '/graphql': {
+        target: 'http://localhost:3000/graphql',
+        changeOrigin: true,
+      },
+    },
+  },
   plugins: [
     react(),
     VitePWA({
