@@ -1,28 +1,12 @@
+import { Block } from '@/components/Block';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
+import { Title } from '@/components/Title';
 import useOrientation from '@/hooks/useOrientation';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
-import { Box, Fab, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import { Fab } from '@mui/material';
 import { LocationList } from './LocationList';
 import { PreferredCategories } from './PreferredCategories';
 import { ProductListLast } from './ProductListLast';
-
-const Title = styled(Typography)({
-  color: '#08B7C4',
-  fontWeight: '700',
-  fontSize: '1.9vh',
-  lineHeight: '19px',
-  marginBottom: '5px',
-});
-
-const Block = styled(Box)({
-  background: 'rgba(251,247,229,0.8)',
-  height: 'auto',
-  width: '100%',
-  borderRadius: '10px',
-  padding: '15px',
-  marginBottom: '10px',
-});
 
 function Welcome() {
   const isPortrait = useOrientation();

@@ -12,6 +12,7 @@ function Pages() {
         height: 'auto',
         top: '55px',
         marginTop: '25px',
+        width: '95%',
       }}
     >
       <Routes>

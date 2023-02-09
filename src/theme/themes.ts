@@ -52,7 +52,7 @@ const themes: Record<Themes, ThemeOptions> = {
     palette: {
       mode: 'light',
       background: {
-        default: '#fafafa',
+        default: 'pink',
         paper: '#fff',
       },
       primary: {
