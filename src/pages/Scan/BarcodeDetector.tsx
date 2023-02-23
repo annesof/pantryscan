@@ -4,10 +4,11 @@ const size = { width: '100%', height: '500px' };
 
 interface BarcodeDetectorProps {
   onDetect: (barcode: string) => void;
+  onError: (error: boolean) => void;
   canvasSize?: { width: string; height: string };
 }
 
-const BarcodeDetector = ({ canvasSize = size, onDetect }: BarcodeDetectorProps) => {
+const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: BarcodeDetectorProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -55,8 +56,10 @@ const BarcodeDetector = ({ canvasSize = size, onDetect }: BarcodeDetectorProps) 
 
     if ('BarcodeDetector' in window) {
       detectBarcode();
+    } else {
+      onError(true);
     }
-  }, [onDetect]);
+  }, [onDetect, onError]);
 
   return (
     <div style={{ width: '95%', height: 'auto', margin: 0, padding: 20, boxSizing: 'border-box' }}>

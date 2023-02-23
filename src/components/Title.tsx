@@ -6,5 +6,5 @@ export const Title = styled(Typography)({
   fontWeight: '700',
   fontSize: '1.9vh',
   lineHeight: '19px',
-  marginBottom: '5px',
+  marginBottom: '15px',
 });

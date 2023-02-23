@@ -9,4 +9,5 @@ export const Block = styled(Box)({
   borderRadius: '10px',
   padding: '15px',
   marginBottom: '10px',
+  //color: '#000000',
 });

@@ -4,7 +4,7 @@ import { gql, useQuery } from '@apollo/client';
 import { Stack } from '@mui/material';
 
 const GET_CATEGORIES = gql`
-  query getCategories($id: String!) {
+  query getCategories($id: Float!) {
     findOneUser(id: $id) {
       favoriteCategories {
         id
@@ -17,7 +17,7 @@ const GET_CATEGORIES = gql`
 
 export const PreferredCategories = () => {
   const { loading, error, data } = useQuery(GET_CATEGORIES, {
-    variables: { id: '1' },
+    variables: { id: 1 },
   });
 
   if (loading) return <></>;

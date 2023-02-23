@@ -39,6 +39,12 @@ const routes: Routes = {
     title: 'Page 4',
     icon: BugReportIcon,
   },
+  [Pages.Product]: {
+    component: asyncComponentLoader(() => import('@/pages/Product/Welcome')),
+    path: '/product/:ean',
+    title: 'Product',
+    icon: BugReportIcon,
+  },
   [Pages.NotFound]: {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),
     path: '*',

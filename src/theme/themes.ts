@@ -16,6 +16,14 @@ const sharedTheme = {
         disableRipple: true,
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '12px',
+          //padding: 3,
+        },
+      },
+    },
     MuiBottomNavigation: {
       styleOverrides: {
         root: {
