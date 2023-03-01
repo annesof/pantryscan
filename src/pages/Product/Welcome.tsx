@@ -1,25 +1,38 @@
 import { Block } from '@/components/Block';
-import { FullSizeCenteredFlexBox } from '@/components/styled';
-import { Title } from '@/components/Title';
+import { FullSizeDecenteredFlexBox } from '@/components/styled';
 import useOrientation from '@/hooks/useOrientation';
-import { Product } from '@/types';
-import { gql, useQuery } from '@apollo/client';
-import { Box, Stack } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import { Article, Category, Product, UserProductPreferences } from '@/types';
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import { Fab } from '@mui/material';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CreateProductPreferences } from './CreateProductPreferences';
+import { ProductArticles } from './ProductArticles';
+import { ProductHeader } from './ProductHeader';
 
 const GET_PRODUCT_PREFERENCES_USER = gql`
   query getByProductAndUser($ean: String!, $idUser: Float!) {
     findByProductAndUser(ean: $ean, idUser: $idUser) {
-      id
-      location {
-        id
-      }
       contentUnit {
-        id
+        name
       }
-      categoryIds
+      categories
+      product {
+        name
+        brand
+        imageSmallUrl
+        quantity
+        articles {
+          id
+          quantity
+          expirationDate
+          location {
+            id
+            name
+          }
+        }
+      }
     }
   }
 `;
@@ -32,53 +45,123 @@ const GET_PRODUCT_CODE = gql`
       brand
       imageSmallUrl
       quantity
-      articles {
-        id
+    }
+  }
+`;
+const ADD_PREFERENCES = gql`
+  mutation createUserProductSettings(
+    $productEan: String!
+    $locationId: String!
+    $userId: Float!
+    $contentUnitId: Float!
+    $categoryIds: String!
+  ) {
+    createUserProductSettings(
+      createUserProductSettingsInput: {
+        productEan: $productEan
+        locationId: $locationId
+        userId: $userId
+        contentUnitId: $contentUnitId
+        categoryIds: $categoryIds
       }
-      categories {
-        id
-        name
-      }
+    ) {
+      id
+    }
+  }
+`;
+
+const GET_ALL_CATEGORIES = gql`
+  query getAllCategories {
+    findAllCategories {
+      id
+      name
+      color
     }
   }
 `;
 
 function Welcome() {
   const isPortrait = useOrientation();
+  const [product, setProduct] = useState<Product>();
+  const [userProductPref, setUserProductPref] = useState<UserProductPreferences>();
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
 
   const { ean } = useParams();
-  const { error: errorPreferences, data: preferencesProduct } = useQuery(
-    GET_PRODUCT_PREFERENCES_USER,
-    {
-      variables: { idUser: 1, ean },
+
+  useQuery(GET_ALL_CATEGORIES, {
+    onCompleted(data) {
+      setCategoryList(data?.findAllCategories);
     },
-  );
-  const { error: errorProduct, data: productData } = useQuery(GET_PRODUCT_CODE, {
-    variables: { ean },
   });
 
-  const preferences = preferencesProduct?.findByProductAndUser;
-  const product: Product = productData?.findOneProduct;
+  const [getProduct] = useLazyQuery(GET_PRODUCT_CODE, {
+    onCompleted: (data) => {
+      setProduct(data?.findOneProduct);
+    },
+  });
+  const { error: errorPreferences } = useQuery(GET_PRODUCT_PREFERENCES_USER, {
+    variables: { idUser: 1, ean },
+    onCompleted: (data) => {
+      setUserProductPref(data?.findByProductAndUser);
+      setProduct(data?.findByProductAndUser.product);
+    },
+    onError: () => {
+      getProduct({
+        variables: { ean },
+      });
+    },
+  });
+
+  const productCategoryList = useMemo(() => {
+    if (userProductPref && categoryList.length !== 0) {
+      return categoryList.filter((element) => userProductPref.categories.includes(element.id));
+    }
+    return [];
+  }, [userProductPref, categoryList]);
+
+  const articlesByLocation: { [key: string]: Article[] } = useMemo(() => {
+    if (product && product.articles) {
+      return product.articles.reduce((group: { [key: string]: Article[] }, article: Article) => {
+        const { location } = article;
+        group[location.name] = group[location.name] ?? [];
+        group[location.name].push(article);
+        return group;
+      }, {});
+    }
+    return {};
+  }, [product]);
+
+  const [savePreferences] = useMutation(ADD_PREFERENCES, {
+    refetchQueries: [{ query: GET_PRODUCT_PREFERENCES_USER, variables: { idUser: 1, ean } }],
+  });
+
   return (
     <>
-      <FullSizeCenteredFlexBox flexDirection={isPortrait ? 'column' : 'row'}>
+      <FullSizeDecenteredFlexBox flexDirection={isPortrait ? 'column' : 'row'}>
         <Block>
-          <Title>Ajout de l&lsquo;aliment</Title>
-          <Grid container spacing={2} sx={{ marginBottom: 5 }}>
-            <Grid xs={3}>
-              <img src={product?.imageSmallUrl} width="60px" style={{ borderRadius: '5px' }} />
-            </Grid>
-            <Grid xs={9}>
-              <Stack>
-                <Box sx={{ fontWeight: 600 }}>{product?.name}</Box>
-                <Box>{product?.quantity}</Box>
-                <Box sx={{ color: 'red' }}>{product?.brand}</Box>
-              </Stack>
-            </Grid>
-          </Grid>
-          {errorPreferences && product && <CreateProductPreferences ean={product?.ean} />}
+          {product && <ProductHeader product={product} categories={productCategoryList} />}
+          {errorPreferences && product && (
+            <CreateProductPreferences
+              ean={product?.ean}
+              savePreferences={savePreferences}
+              categories={categoryList}
+            />
+          )}
+          {userProductPref && Object.keys(articlesByLocation).length !== 0 && (
+            <ProductArticles
+              articles={articlesByLocation}
+              content={userProductPref?.contentUnit?.name}
+            />
+          )}
         </Block>
-      </FullSizeCenteredFlexBox>
+      </FullSizeDecenteredFlexBox>
+      <Fab
+        sx={{ color: 'common.white', position: 'absolute', right: 5, bottom: -150 }}
+        aria-label="scan"
+        color="primary"
+      >
+        <AddCircleRoundedIcon fontSize="large" />
+      </Fab>
     </>
   );
 }

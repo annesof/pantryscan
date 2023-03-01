@@ -1,7 +1,7 @@
-import { gql, useQuery } from '@apollo/client';
-import { Box, Card, CardContent, CardMedia, Stack, Unstable_Grid2 as Grid } from '@mui/material';
-
 import { Product } from '@/types';
+import { gql, useQuery } from '@apollo/client';
+import { Box, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const GET_LAST_PRODUCTS = gql`
   query getLastProducts($fetchProductsArgs: FetchProductsArgs!) {
@@ -16,40 +16,67 @@ const GET_LAST_PRODUCTS = gql`
 `;
 
 export const ProductListLast = () => {
+  const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_LAST_PRODUCTS, {
     variables: { fetchProductsArgs: { skip: 0, take: 4, sortBy: 'NAME', withFoods: true } },
   });
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
   return (
-    <Grid container spacing={2}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
       {data?.findProducts.map(({ ean, name, brand, imageSmallUrl, quantity }: Product) => (
-        <Grid key={ean} xs={12}>
-          <Card
-            variant="outlined"
+        <Box
+          key={ean}
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            height: 60,
+            marginBottom: '15px',
+          }}
+          onClick={() => navigate(`/product/${ean}`)}
+        >
+          <Box
             sx={{
-              display: 'flex',
-              margin: '0.5px',
-              fontSize: '0.9rem',
-              height: '55px',
-              background: 'transparent',
-              color: 'black',
+              background: `url(${imageSmallUrl || '/noimage.png'}) no-repeat  center `,
+              backgroundSize: 'cover',
+              minHeight: 60,
+              minWidth: 60,
+              marginLeft: '2px',
+              flexGrow: 0,
             }}
-          >
-            <CardMedia
-              component="img"
-              image={imageSmallUrl || '/noimage.png'}
-              sx={{ width: 70, borderRadius: '5px' }}
-            />
-            <CardContent sx={{ flex: '1 0 auto', paddingTop: '5px' }}>
-              <Box sx={{ fontWeight: 800 }}>{name}</Box>
-              <Stack justifyContent="space-between" direction="row">
-                <Box>{brand}</Box> <Box sx={{ background: 'transparent' }}>{quantity}</Box>
-              </Stack>
-            </CardContent>
-          </Card>
-        </Grid>
+          ></Box>
+          <Box>
+            <Typography
+              sx={{
+                //flexGrow: 5,
+                textOverflow: 'ellipsis',
+                width: '250px',
+                display: 'inline-block',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                marginLeft: '10px',
+                fontWeight: 600,
+                color: '#333333',
+                fontSize: '14px',
+                lineHeight: '18px',
+              }}
+            >
+              {name}
+            </Typography>
+            <Typography
+              sx={{
+                marginLeft: '10px',
+                fontWeight: 700,
+                color: '#59CD90',
+                fontSize: '14px',
+                lineHeight: '18px',
+              }}
+            >
+              {brand}
+            </Typography>
+          </Box>
+        </Box>
       ))}
-    </Grid>
+    </Box>
   );
 };

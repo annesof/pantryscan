@@ -1,17 +1,8 @@
+import { Chip } from '@/components/Chip';
 import { Category, ContentUnit, Location } from '@/types';
-import { gql, useMutation, useQuery } from '@apollo/client';
-import { Autocomplete, Button, Chip, Stack, TextField } from '@mui/material';
-import { useCallback, useState } from 'react';
-
-const GET_ALL_CATEGORIES = gql`
-  query getAllCategories {
-    findAllCategories {
-      id
-      name
-    }
-  }
-`;
-
+import { gql, useQuery } from '@apollo/client';
+import { Autocomplete, Button, Stack, TextField } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
 const GET_ALL_LOCATIONS = gql`
   query getAllLocations {
     findAllLocations {
@@ -30,64 +21,43 @@ const GET_ALL_UNITS = gql`
   }
 `;
 
-/*const ADD_PREFERENCES = gql`
-  mutation createUserProductSettings(
-    $productEan: String!
-    $locationId: String!
-    $userId: Float!
-    $contentUnitId: Float!
-    $categoryIds: String!
-  ) {
-    createUserProductSettings(
-      createUserProductSettingsInput: {
-        productEan: $productEan
-        locationId: $locationId
-        userId: $userId
-        contentUnitId: $contentUnitId
-        categoryIds: $categoryIds
-      }
-    ) {
-      id
-    }
-  }
-`;*/
+interface SaveProductPreferencesVariables {
+  categoryIds: string;
+  userId: number;
+  locationId: string;
+  productEan: string;
+  contentUnitId: number;
+}
 
-const ADD_PREFERENCES = gql`
-  mutation createUserProductSettings(
-    $productEan: String!
-    $locationId: String!
-    $userId: Float!
-    $contentUnitId: Float!
-    $categoryIds: String!
-  ) {
-    createUserProductSettings(
-      createUserProductSettingsInput: {
-        productEan: $productEan
-        locationId: $locationId
-        userId: $userId
-        contentUnitId: $contentUnitId
-        categoryIds: $categoryIds
-      }
-    ) {
-      id
-    }
-  }
-`;
+interface CreateProductPreferencesProps {
+  ean: string;
+  savePreferences: ({ variables }: { variables: SaveProductPreferencesVariables }) => Promise<any>;
+  categories: Category[];
+}
 
-export const CreateProductPreferences = ({ ean }: { ean: string }) => {
+export const CreateProductPreferences = ({
+  ean,
+  savePreferences,
+  categories,
+}: CreateProductPreferencesProps) => {
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<Location | null>();
   const [selectedUnit, setSelectedUnit] = useState<ContentUnit | null>();
+  const [errorForm, setErrorForm] = useState(true);
 
-  const { loading: loadingCategories, data: categories } = useQuery(GET_ALL_CATEGORIES);
   const { loading: loadingLocations, data: locations } = useQuery(GET_ALL_LOCATIONS);
   const { loading: loadingUnits, data: units } = useQuery(GET_ALL_UNITS);
 
-  const [savePreferences, { data, loading, error }] = useMutation(ADD_PREFERENCES);
-
-  const categoryList: Category[] = categories?.findAllCategories || [];
   const locationList: Location[] = locations?.findAllLocations || [];
   const unitList: ContentUnit[] = units?.findAllUnits || [];
+
+  useEffect(() => {
+    if (selectedCategories.length !== 0 && selectedLocation && selectedUnit && ean) {
+      setErrorForm(false);
+    } else {
+      setErrorForm(true);
+    }
+  }, [selectedCategories, selectedLocation, selectedUnit, ean]);
 
   const buildAndSavePreferences = useCallback(() => {
     if (selectedLocation && selectedUnit) {
@@ -114,16 +84,17 @@ export const CreateProductPreferences = ({ ean }: { ean: string }) => {
         filterSelectedOptions
         getOptionLabel={(option) => option.name}
         id="categories"
-        options={categoryList}
-        loading={loadingCategories}
+        options={categories}
+        //loading={loadingCategories}
         sx={{ width: 300 }}
         renderTags={(value, getTagProps) =>
           value.map((option, index: number) => (
             <Chip
-              //variant="outlined"
+              color={option.color}
               label={option.name}
               {...getTagProps({ index })}
               key={option.id}
+              size="small"
             />
           ))
         }
@@ -138,7 +109,9 @@ export const CreateProductPreferences = ({ ean }: { ean: string }) => {
         options={locationList}
         loading={loadingLocations}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Location" size="small" />}
+        renderInput={(params) => (
+          <TextField {...params} label="Emplacement habituel" size="small" />
+        )}
       />
 
       <Autocomplete
@@ -152,7 +125,9 @@ export const CreateProductPreferences = ({ ean }: { ean: string }) => {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Unité" size="small" />}
       />
-      <Button onClick={() => buildAndSavePreferences()}>Save</Button>
+      <Button variant="contained" onClick={() => buildAndSavePreferences()} disabled={errorForm}>
+        Suivant
+      </Button>
     </Stack>
   );
 };

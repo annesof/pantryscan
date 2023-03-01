@@ -12,6 +12,12 @@ export type Product = {
   articles?: Article[];
 };
 
+export type UserProductPreferences = {
+  product: Product;
+  categories: number[];
+  contentUnit: ContentUnit;
+};
+
 export type Category = {
   id: number;
   name: string;
@@ -20,7 +26,8 @@ export type Category = {
 
 export type Article = {
   id: number;
-  expirationDate?: string;
+  expirationDate?: number;
+  quantity: number;
   started?: boolean;
   location: Location;
 };

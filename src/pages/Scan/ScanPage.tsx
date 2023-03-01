@@ -62,7 +62,7 @@ function ScanPage() {
 
   return (
     <FullSizeCenteredFlexBox flexDirection={isPortrait ? 'column' : 'row'}>
-      <Block>
+      <Block sx={{ marginTop: '70px' }}>
         <Title>Scan de l&apos;article</Title> {loading && <p>Loading ...</p>}
         {!videoError && <BarcodeDetector onDetect={setBarcode} onError={setVideoError} />}
         {videoError && (
@@ -71,7 +71,7 @@ function ScanPage() {
               <Box>
                 L&apos;appareil ne prend pas en charge l&apos;accès à la caméra
                 <span role="img" aria-label="thinking-face">
-                  🤔
+                  😟
                 </span>
               </Box>
               <Box>Saisir le code barre ci-dessous</Box>

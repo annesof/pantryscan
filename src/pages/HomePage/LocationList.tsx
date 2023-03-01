@@ -22,11 +22,12 @@ export const LocationList = () => {
           <Box
             sx={{
               borderRadius: '5px',
-              background: '#74DDE4',
+              background: '#08B7C4',
               padding: 1,
-
+              color: 'white',
               margin: '5px',
               fontSize: '0.9rem',
+              fontWeight: 600,
             }}
           >
             {name}
