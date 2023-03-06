@@ -4,7 +4,7 @@ import useOrientation from '@/hooks/useOrientation';
 import { Article, Category, Product, UserProductPreferences } from '@/types';
 import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import { Fab } from '@mui/material';
+import { Box, Fab } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CreateProductPreferences } from './CreateProductPreferences';
@@ -155,13 +155,11 @@ function Welcome() {
           )}
         </Block>
       </FullSizeDecenteredFlexBox>
-      <Fab
-        sx={{ color: 'common.white', position: 'absolute', right: 5, bottom: -150 }}
-        aria-label="scan"
-        color="primary"
-      >
-        <AddCircleRoundedIcon fontSize="large" />
-      </Fab>
+      <Box sx={{ position: 'absolute', bottom: -50, right: 16 }}>
+        <Fab sx={{ color: 'common.white' }} aria-label="scan" color="primary">
+          <AddCircleRoundedIcon fontSize="large" />
+        </Fab>
+      </Box>
     </>
   );
 }

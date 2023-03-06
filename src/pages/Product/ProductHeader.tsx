@@ -1,6 +1,6 @@
 import { Chip } from '@/components/Chip';
 import { Category, Product } from '@/types';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, useMediaQuery } from '@mui/material';
 import { useMemo } from 'react';
 
 export const ProductHeader = ({
@@ -10,6 +10,8 @@ export const ProductHeader = ({
   product: Product;
   categories: Category[];
 }) => {
+  const small = useMediaQuery('(max-width:300px)');
+
   const nbElements = useMemo(() => {
     return product.articles?.reduce(
       (previousValue, currentValue) => previousValue + currentValue.quantity,
@@ -23,8 +25,8 @@ export const ProductHeader = ({
         sx={{
           borderRadius: '50%',
           background: 'white',
-          width: '130px',
-          height: '130px',
+          width: '120px',
+          height: '120px',
           textAlign: 'center',
           display: 'flex',
           alignItems: 'center',
@@ -38,7 +40,7 @@ export const ProductHeader = ({
         <img
           src={product?.imageSmallUrl}
           width="70px"
-          style={{ borderRadius: '10px', maxHeight: '90px' }}
+          style={{ borderRadius: '10px', maxHeight: '85px' }}
         />
       </Box>
       <Box
@@ -53,7 +55,7 @@ export const ProductHeader = ({
             <Typography
               variant="subtitle1"
               display="block"
-              sx={{ lineHeight: 1.5, fontWeight: 600, fontSize: '20px' }}
+              sx={{ lineHeight: 1, fontWeight: 600, fontSize: small ? '16px' : '18px' }}
             >
               {product?.name}
             </Typography>
