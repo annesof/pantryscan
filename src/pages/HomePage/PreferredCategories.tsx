@@ -1,27 +1,16 @@
 import { Chip } from '@/components/Chip';
+import { GET_FAV_CATEGORIES } from '@/data/requests';
 import { Category } from '@/types';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Stack } from '@mui/material';
 
-const GET_CATEGORIES = gql`
-  query getCategories($id: Float!) {
-    findOneUser(id: $id) {
-      favoriteCategories {
-        id
-        name
-        color
-      }
-    }
-  }
-`;
-
 export const PreferredCategories = () => {
-  const { loading, error, data } = useQuery(GET_CATEGORIES, {
+  const { loading, error, data } = useQuery(GET_FAV_CATEGORIES, {
     variables: { id: 1 },
   });
 
   if (loading) return <></>;
-  if (error) return <>`Error! ${error}`</>;
+  if (error) return <>Error! </>;
   return (
     <Stack direction="row" ml={2}>
       {data.findOneUser.favoriteCategories.map((item: Category) => (

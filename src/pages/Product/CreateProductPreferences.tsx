@@ -1,25 +1,9 @@
 import { Chip } from '@/components/Chip';
+import { GET_ALL_LOCATIONS, GET_ALL_UNITS } from '@/data/requests';
 import { Category, ContentUnit, Location } from '@/types';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-const GET_ALL_LOCATIONS = gql`
-  query getAllLocations {
-    findAllLocations {
-      id
-      name
-    }
-  }
-`;
-
-const GET_ALL_UNITS = gql`
-  query getAllUnits {
-    findAllUnits {
-      id
-      name
-    }
-  }
-`;
 
 interface SaveProductPreferencesVariables {
   categoryIds: string;
@@ -85,6 +69,7 @@ export const CreateProductPreferences = ({
         getOptionLabel={(option) => option.name}
         id="categories"
         options={categories}
+        disableCloseOnSelect
         //loading={loadingCategories}
         sx={{ width: 300 }}
         renderTags={(value, getTagProps) =>

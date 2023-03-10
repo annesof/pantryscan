@@ -1,5 +1,5 @@
 import { Block } from '@/components/Block';
-import { MenuDialog } from '@/components/MenuDialog';
+import { MenuDialog } from '@/components/DialogMenu';
 import { Title } from '@/components/Title';
 import { Article } from '@/types';
 import ClearIcon from '@mui/icons-material/Clear';

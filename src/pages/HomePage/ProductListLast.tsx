@@ -1,19 +1,8 @@
+import { GET_LAST_PRODUCTS } from '@/data/requests';
 import { Product } from '@/types';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
-const GET_LAST_PRODUCTS = gql`
-  query getLastProducts($fetchProductsArgs: FetchProductsArgs!) {
-    findProducts(fetchProductsArgs: $fetchProductsArgs) {
-      ean
-      name
-      brand
-      imageSmallUrl
-      quantity
-    }
-  }
-`;
 
 export const ProductListLast = () => {
   const navigate = useNavigate();

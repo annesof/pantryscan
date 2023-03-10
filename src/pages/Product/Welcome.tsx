@@ -1,84 +1,21 @@
 import { Block } from '@/components/Block';
 import { FullSizeDecenteredFlexBox } from '@/components/styled';
+import {
+  ADD_PREFERENCES,
+  GET_ALL_CATEGORIES,
+  GET_PRODUCT_CODE,
+  GET_PRODUCT_PREFERENCES_USER,
+} from '@/data/requests';
 import useOrientation from '@/hooks/useOrientation';
 import { Article, Category, Product, UserProductPreferences } from '@/types';
-import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import { Box, Fab } from '@mui/material';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { Box } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ArticleAddModal } from './ArticleAddModal';
 import { CreateProductPreferences } from './CreateProductPreferences';
 import { ProductArticles } from './ProductArticles';
 import { ProductHeader } from './ProductHeader';
-
-const GET_PRODUCT_PREFERENCES_USER = gql`
-  query getByProductAndUser($ean: String!, $idUser: Float!) {
-    findByProductAndUser(ean: $ean, idUser: $idUser) {
-      contentUnit {
-        name
-      }
-      categories
-      product {
-        name
-        brand
-        imageSmallUrl
-        quantity
-        articles {
-          id
-          quantity
-          expirationDate
-          location {
-            id
-            name
-          }
-        }
-      }
-    }
-  }
-`;
-
-const GET_PRODUCT_CODE = gql`
-  query getProduct($ean: String!) {
-    findOneProduct(ean: $ean) {
-      ean
-      name
-      brand
-      imageSmallUrl
-      quantity
-    }
-  }
-`;
-const ADD_PREFERENCES = gql`
-  mutation createUserProductSettings(
-    $productEan: String!
-    $locationId: String!
-    $userId: Float!
-    $contentUnitId: Float!
-    $categoryIds: String!
-  ) {
-    createUserProductSettings(
-      createUserProductSettingsInput: {
-        productEan: $productEan
-        locationId: $locationId
-        userId: $userId
-        contentUnitId: $contentUnitId
-        categoryIds: $categoryIds
-      }
-    ) {
-      id
-    }
-  }
-`;
-
-const GET_ALL_CATEGORIES = gql`
-  query getAllCategories {
-    findAllCategories {
-      id
-      name
-      color
-    }
-  }
-`;
 
 function Welcome() {
   const isPortrait = useOrientation();
@@ -156,9 +93,7 @@ function Welcome() {
         </Block>
       </FullSizeDecenteredFlexBox>
       <Box sx={{ position: 'absolute', bottom: -50, right: 16 }}>
-        <Fab sx={{ color: 'common.white' }} aria-label="scan" color="primary">
-          <AddCircleRoundedIcon fontSize="large" />
-        </Fab>
+        <ArticleAddModal userProductPref={userProductPref} />
       </Box>
     </>
   );

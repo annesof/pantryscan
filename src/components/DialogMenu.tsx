@@ -13,7 +13,7 @@ import {
 import { styled } from '@mui/material/styles';
 import { ElementType, MouseEvent, ReactNode, useState } from 'react';
 
-const BootstrapDialog = styled(BaseDialog)(({ theme }) => ({
+const StyledDialog = styled(BaseDialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
   },
@@ -35,7 +35,7 @@ interface DialogProps {
   onCloseMenu: any;
 }
 
-function BootstrapDialogTitle(props: DialogTitleProps) {
+function StyledDialogTitle(props: DialogTitleProps) {
   const { children, onClose, ...other } = props;
 
   return (
@@ -59,11 +59,10 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
   );
 }
 
-export const MenuDialog = ({ title, children, action, onCloseMenu }: DialogProps) => {
+export const MenuDialog = ({ title, children, action }: DialogProps) => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = (event: MouseEvent<HTMLLIElement>) => {
     event.stopPropagation();
-    //onCloseMenu();
     setOpen(true);
   };
   const handleClose = () => {
@@ -78,16 +77,16 @@ export const MenuDialog = ({ title, children, action, onCloseMenu }: DialogProps
         </ListItemIcon>
         {action.name}
       </MenuItem>
-      <BootstrapDialog
+      <StyledDialog
         fullWidth={true}
         maxWidth={'md'}
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <StyledDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {title}
-        </BootstrapDialogTitle>
+        </StyledDialogTitle>
         <DialogContent onClick={(e) => e.stopPropagation()}>{children}</DialogContent>
         <DialogActions>
           <Button
@@ -99,7 +98,7 @@ export const MenuDialog = ({ title, children, action, onCloseMenu }: DialogProps
             {action.label}
           </Button>
         </DialogActions>
-      </BootstrapDialog>
+      </StyledDialog>
     </>
   );
 };

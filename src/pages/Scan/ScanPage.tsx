@@ -1,21 +1,13 @@
 import { Block } from '@/components/Block';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
 import { Title } from '@/components/Title';
+import { GET_PRODUCT_CODE } from '@/data/requests';
 import useOrientation from '@/hooks/useOrientation';
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BarcodeDetector from './BarcodeDetector';
-
-const GET_PRODUCT_CODE = gql`
-  query getProduct($ean: String!) {
-    findOneProduct(ean: $ean) {
-      ean
-      name
-    }
-  }
-`;
 
 function ScanPage() {
   const isPortrait = useOrientation();

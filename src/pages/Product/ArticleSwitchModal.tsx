@@ -1,4 +1,4 @@
-import { MenuDialog } from '@/components/MenuDialog';
+import { MenuDialog } from '@/components/DialogMenu';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 
 interface ArticleSwitchModalProps {

@@ -45,7 +45,7 @@ interface Props {
   setIdSelected: any;
 }
 export const ArticleRowEdit = ({ id, quantity, expirationDate, setIdSelected }: Props) => {
-  const [quantityLocal, setQuantityLocal] = useState<number | undefined>(quantity | 0);
+  const [quantityLocal, setQuantityLocal] = useState<number>(quantity || 0);
   const [expDate, setExpDate] = useState<Date | null>(
     expirationDate ? fromUnixTime(expirationDate / 1000) : null,
   );
@@ -66,7 +66,7 @@ export const ArticleRowEdit = ({ id, quantity, expirationDate, setIdSelected }: 
               size="small"
               onClick={() =>
                 setQuantityLocal((qty) => {
-                  if (qty === 0) return qty;
+                  if (!qty || qty === 0) return 0;
                   return qty - 1;
                 })
               }

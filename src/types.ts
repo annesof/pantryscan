@@ -14,6 +14,7 @@ export type Product = {
 
 export type UserProductPreferences = {
   product: Product;
+  location: Location;
   categories: number[];
   contentUnit: ContentUnit;
 };

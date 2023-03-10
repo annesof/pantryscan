@@ -1,18 +1,10 @@
+import { GET_ALL_LOCATIONS } from '@/data/requests';
 import { Location } from '@/types';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Box, Unstable_Grid2 as Grid } from '@mui/material';
 
-const GET_LOCATIONS = gql`
-  query getLocations {
-    findAllLocations {
-      id
-      name
-    }
-  }
-`;
-
 export const LocationList = () => {
-  const { loading, error, data } = useQuery(GET_LOCATIONS);
+  const { loading, error, data } = useQuery(GET_ALL_LOCATIONS);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
   return (
