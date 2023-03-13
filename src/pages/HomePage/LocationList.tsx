@@ -1,4 +1,4 @@
-import { GET_ALL_LOCATIONS } from '@/data/requests';
+import { GET_ALL_LOCATIONS } from '@/data/queries';
 import { Location } from '@/types';
 import { useQuery } from '@apollo/client';
 import { Box, Unstable_Grid2 as Grid } from '@mui/material';

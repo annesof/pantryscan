@@ -1,12 +1,7 @@
 import { Block } from '@/components/Block';
 import { FullSizeDecenteredFlexBox } from '@/components/styled';
-import {
-  ADD_PREFERENCES,
-  GET_ALL_CATEGORIES,
-  GET_PRODUCT_CODE,
-  GET_PRODUCT_PREFERENCES_USER,
-} from '@/data/requests';
-import useOrientation from '@/hooks/useOrientation';
+import { ADD_PREFERENCES } from '@/data/mutations';
+import { GET_ALL_CATEGORIES, GET_PRODUCT_CODE, GET_PRODUCT_PREFERENCES_USER } from '@/data/queries';
 import { Article, Category, Product, UserProductPreferences } from '@/types';
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { Box } from '@mui/material';
@@ -18,7 +13,6 @@ import { ProductArticles } from './ProductArticles';
 import { ProductHeader } from './ProductHeader';
 
 function Welcome() {
-  const isPortrait = useOrientation();
   const [product, setProduct] = useState<Product>();
   const [userProductPref, setUserProductPref] = useState<UserProductPreferences>();
   const [categoryList, setCategoryList] = useState<Category[]>([]);
@@ -74,7 +68,7 @@ function Welcome() {
 
   return (
     <>
-      <FullSizeDecenteredFlexBox flexDirection={isPortrait ? 'column' : 'row'}>
+      <FullSizeDecenteredFlexBox>
         <Block>
           {product && <ProductHeader product={product} categories={productCategoryList} />}
           {errorPreferences && product && (
@@ -86,13 +80,14 @@ function Welcome() {
           )}
           {userProductPref && Object.keys(articlesByLocation).length !== 0 && (
             <ProductArticles
+              ean={userProductPref.product.ean}
               articles={articlesByLocation}
               content={userProductPref?.contentUnit?.name}
             />
           )}
         </Block>
       </FullSizeDecenteredFlexBox>
-      <Box sx={{ position: 'absolute', bottom: -50, right: 16 }}>
+      <Box sx={{ position: 'fixed', top: 40, right: 16 }}>
         <ArticleAddModal userProductPref={userProductPref} />
       </Box>
     </>

@@ -90,6 +90,9 @@ export const DialogButton = ({ title, children, action, open, setOpen }: DialogP
           >
             {action.label}
           </Button>
+          <Button variant="outlined" onClick={() => setOpen(false)}>
+            Annuler
+          </Button>
         </DialogActions>
       </StyledDialog>
     </>

@@ -15,7 +15,7 @@ function Welcome() {
   const navigate = useNavigate();
   return (
     <>
-      <FullSizeCenteredFlexBox flexDirection={isPortrait ? 'column' : 'row'}>
+      <FullSizeCenteredFlexBox flexDirection={'column'}>
         <img src={Logo} alt="icon" width="65%" />
         <Block>
           <Title>Derniers ajouts</Title>

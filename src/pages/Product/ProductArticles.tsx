@@ -1,18 +1,17 @@
 import { Block } from '@/components/Block';
-import { MenuDialog } from '@/components/DialogMenu';
 import { Title } from '@/components/Title';
 import { Article } from '@/types';
-import ClearIcon from '@mui/icons-material/Clear';
 import CreateIcon from '@mui/icons-material/Create';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Backdrop, Box, Divider, Fade, IconButton, Menu, Typography, Zoom } from '@mui/material';
+import { Backdrop, Divider, Fade, IconButton, Menu, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { format, fromUnixTime } from 'date-fns';
 import { Fragment, MouseEvent, useState } from 'react';
+import { ArticleDeleteModal } from './ArticleDeleteModal';
 import { ArticleRowEdit } from './ArticleRowEdit';
 import { ArticleSwitchModal } from './ArticleSwitchModal';
 
-const MoreAction = () => {
+const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -29,7 +28,7 @@ const MoreAction = () => {
           color: 'white',
           '&:hover': { background: '#08B7C4' },
         }}
-        aria-label="fingerprint"
+        aria-label="more"
         size="small"
         aria-controls={open ? 'account-menu' : undefined}
         aria-haspopup="true"
@@ -47,12 +46,8 @@ const MoreAction = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
       >
-        <ArticleSwitchModal handleClose={handleClose} />
-        <MenuDialog
-          title="Nouvel article"
-          onCloseMenu={handleClose}
-          action={{ name: 'Suppression', Icon: ClearIcon, label: 'terminer' }}
-        />
+        <ArticleSwitchModal handleClose={handleClose} id={id} ean={ean} />
+        <ArticleDeleteModal handleClose={handleClose} id={id} ean={ean} />
       </Menu>
     </>
   );
@@ -61,9 +56,11 @@ const MoreAction = () => {
 export const ProductArticles = ({
   articles,
   content,
+  ean,
 }: {
   articles: { [key: string]: Article[] };
   content: string;
+  ean: string;
 }) => {
   const [idSelected, setIdSelected] = useState<number>();
   return (
@@ -74,26 +71,19 @@ export const ProductArticles = ({
           <Grid container spacing={1}>
             {articles[key].map(({ id, expirationDate, quantity }, index) => (
               <Fragment key={id}>
-                <Zoom
+                <Fade
                   in={idSelected === id}
                   style={{ transitionDelay: idSelected === id ? '200ms' : '0ms' }}
                 >
-                  <Box
-                    sx={{
-                      ...(idSelected !== id && { display: 'none' }),
-                      background: '#08B7C4',
-                      borderRadius: '10px',
-                      zIndex: 1000,
-                    }}
-                  >
-                    <ArticleRowEdit
-                      id={id}
-                      quantity={quantity}
-                      expirationDate={expirationDate}
-                      setIdSelected={setIdSelected}
-                    />
-                  </Box>
-                </Zoom>
+                  <ArticleRowEdit
+                    id={id}
+                    ean={ean}
+                    quantity={quantity}
+                    expirationDate={expirationDate}
+                    setIdSelected={setIdSelected}
+                    hidden={idSelected !== id}
+                  />
+                </Fade>
                 <Fade in={idSelected !== id}>
                   <Grid
                     container
@@ -122,7 +112,7 @@ export const ProductArticles = ({
                           color: 'white',
                           '&:hover': { background: '#08B7C4' },
                         }}
-                        aria-label="fingerprint"
+                        aria-label="edit"
                         size="small"
                         onClick={() => {
                           setIdSelected(id);
@@ -130,7 +120,7 @@ export const ProductArticles = ({
                       >
                         <CreateIcon fontSize="inherit" />
                       </IconButton>
-                      <MoreAction />
+                      <MoreAction id={id} ean={ean} />
                     </Grid>
                   </Grid>
                 </Fade>

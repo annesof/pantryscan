@@ -1,5 +1,5 @@
 import { Chip } from '@/components/Chip';
-import { GET_ALL_LOCATIONS, GET_ALL_UNITS } from '@/data/requests';
+import { GET_ALL_LOCATIONS, GET_ALL_UNITS } from '@/data/queries';
 import { Category, ContentUnit, Location } from '@/types';
 import { useQuery } from '@apollo/client';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';

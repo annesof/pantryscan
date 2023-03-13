@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
-import { ElementType, MouseEvent, ReactNode, useState } from 'react';
+import { ElementType, MouseEvent, ReactNode, useCallback, useState } from 'react';
 
 const StyledDialog = styled(BaseDialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -31,7 +31,13 @@ export interface DialogTitleProps {
 interface DialogProps {
   title: string;
   children?: ReactNode;
-  action: { name: string; Icon: ElementType; handleAction?: any; label: string };
+  action: {
+    name: string;
+    Icon: ElementType;
+    handleAction?: any;
+    label: string;
+    disabled?: boolean;
+  };
   onCloseMenu: any;
 }
 
@@ -39,7 +45,7 @@ function StyledDialogTitle(props: DialogTitleProps) {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+    <DialogTitle sx={{ m: 0, p: 2, fontSize: '14px' }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -59,15 +65,24 @@ function StyledDialogTitle(props: DialogTitleProps) {
   );
 }
 
-export const MenuDialog = ({ title, children, action }: DialogProps) => {
+export const DialogMenu = ({ title, children, action }: DialogProps) => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = (event: MouseEvent<HTMLLIElement>) => {
     event.stopPropagation();
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (event: any, reason: string) => {
+    event.stopPropagation();
+    if (reason !== 'backdropClick') {
+      setOpen(false);
+    }
   };
+  const onSubmit = useCallback(() => {
+    if (action.handleAction) {
+      action.handleAction();
+    }
+    setOpen(false);
+  }, [action]);
 
   return (
     <>
@@ -84,7 +99,7 @@ export const MenuDialog = ({ title, children, action }: DialogProps) => {
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <StyledDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <StyledDialogTitle id="customized-dialog-title" onClose={() => setOpen(false)}>
           {title}
         </StyledDialogTitle>
         <DialogContent onClick={(e) => e.stopPropagation()}>{children}</DialogContent>
@@ -93,9 +108,17 @@ export const MenuDialog = ({ title, children, action }: DialogProps) => {
             sx={{ color: 'common.white' }}
             variant="contained"
             autoFocus
-            onClick={handleClose}
+            disabled={action.disabled}
+            onClick={onSubmit}
           >
             {action.label}
+          </Button>
+          <Button
+            //sx={{ color: 'common.white' }}
+            variant="outlined"
+            onClick={() => setOpen(false)}
+          >
+            Annuler
           </Button>
         </DialogActions>
       </StyledDialog>

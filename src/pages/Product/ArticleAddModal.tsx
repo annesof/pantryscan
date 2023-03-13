@@ -1,5 +1,7 @@
 import { DialogButton } from '@/components/DialogButton';
-import { ADD_ARTICLES, GET_ALL_LOCATIONS, GET_PRODUCT_PREFERENCES_USER } from '@/data/requests';
+import { ADD_ARTICLES } from '@/data/mutations';
+import { GET_ALL_LOCATIONS, GET_PRODUCT_PREFERENCES_USER } from '@/data/queries';
+
 import { Location, UserProductPreferences } from '@/types';
 import { useMutation, useQuery } from '@apollo/client';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';

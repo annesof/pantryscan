@@ -55,48 +55,6 @@ export const GET_LAST_PRODUCTS = gql`
   }
 `;
 
-export const ADD_PREFERENCES = gql`
-  mutation createUserProductSettings(
-    $productEan: String!
-    $locationId: String!
-    $userId: Float!
-    $contentUnitId: Float!
-    $categoryIds: String!
-  ) {
-    createUserProductSettings(
-      createUserProductSettingsInput: {
-        productEan: $productEan
-        locationId: $locationId
-        userId: $userId
-        contentUnitId: $contentUnitId
-        categoryIds: $categoryIds
-      }
-    ) {
-      id
-    }
-  }
-`;
-
-export const ADD_ARTICLES = gql`
-  mutation createArticle(
-    $eanProduct: String!
-    $idLocation: String!
-    $quantity: Float!
-    $expirationDate: Timestamp
-  ) {
-    createArticle(
-      createArticleInput: {
-        eanProduct: $eanProduct
-        idLocation: $idLocation
-        quantity: $quantity
-        expirationDate: $expirationDate
-      }
-    ) {
-      id
-    }
-  }
-`;
-
 export const GET_ALL_CATEGORIES = gql`
   query getAllCategories {
     findAllCategories {

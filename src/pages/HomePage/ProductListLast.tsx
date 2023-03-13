@@ -1,4 +1,4 @@
-import { GET_LAST_PRODUCTS } from '@/data/requests';
+import { GET_LAST_PRODUCTS } from '@/data/queries';
 import { Product } from '@/types';
 import { useQuery } from '@apollo/client';
 import { Box, Typography } from '@mui/material';
@@ -13,7 +13,7 @@ export const ProductListLast = () => {
   if (error) return <p>Error : {error.message}</p>;
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-      {data?.findProducts.map(({ ean, name, brand, imageSmallUrl, quantity }: Product) => (
+      {data?.findProducts.map(({ ean, name, brand, imageSmallUrl }: Product) => (
         <Box
           key={ean}
           sx={{

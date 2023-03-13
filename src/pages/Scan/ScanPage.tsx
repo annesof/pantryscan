@@ -1,7 +1,7 @@
 import { Block } from '@/components/Block';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
 import { Title } from '@/components/Title';
-import { GET_PRODUCT_CODE } from '@/data/requests';
+import { GET_PRODUCT_CODE } from '@/data/queries';
 import useOrientation from '@/hooks/useOrientation';
 import { useLazyQuery } from '@apollo/client';
 import { Box, Button, Stack, TextField } from '@mui/material';
@@ -12,6 +12,7 @@ import BarcodeDetector from './BarcodeDetector';
 function ScanPage() {
   const isPortrait = useOrientation();
   const [barcode, setBarcode] = useState<string>();
+  const [barcodeInput, setBarcodeInput] = useState<string>();
   const [videoError, setVideoError] = useState<boolean>(false);
   const navigate = useNavigate();
   const [getProduct, { loading, error }] = useLazyQuery(GET_PRODUCT_CODE, {
@@ -74,13 +75,13 @@ function ScanPage() {
                 size="small"
                 fullWidth
                 sx={{ marginBottom: 4 }}
-                onChange={(e) => setBarcode(e.target.value)}
+                onChange={(e) => setBarcodeInput(e.target.value)}
               />
               <Button
                 sx={{ color: 'common.white' }}
                 variant="contained"
                 onClick={() => {
-                  barcode && navigate(`/product/${barcode}`);
+                  barcodeInput && navigate(`/product/${barcodeInput}`);
                 }}
               >
                 Ok

@@ -1,5 +1,5 @@
 import { Chip } from '@/components/Chip';
-import { GET_FAV_CATEGORIES } from '@/data/requests';
+import { GET_FAV_CATEGORIES } from '@/data/queries';
 import { Category } from '@/types';
 import { useQuery } from '@apollo/client';
 import { Stack } from '@mui/material';
