@@ -9,7 +9,14 @@ export type Product = {
   imageUrl?: string;
   quantity?: string;
   categories?: Category[];
-  foods?: Food[];
+  articles?: Article[];
+};
+
+export type UserProductPreferences = {
+  product: Product;
+  location: Location;
+  categories: number[];
+  contentUnit: ContentUnit;
 };
 
 export type Category = {
@@ -18,14 +25,20 @@ export type Category = {
   color?: string;
 };
 
-export type Food = {
+export type Article = {
   id: number;
-  expirationDate?: string;
+  expirationDate?: number;
+  quantity: number;
   started?: boolean;
   location: Location;
 };
 
 export type Location = {
+  id: string;
+  name: string;
+};
+
+export type ContentUnit = {
   id: number;
   name: string;
 };

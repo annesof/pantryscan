@@ -4,6 +4,9 @@ import { deepmerge } from '@mui/utils';
 import { Themes } from './types';
 
 const sharedTheme = {
+  typography: {
+    fontFamily: ['Poppins', 'sans-serif', 'Roboto'].join(','),
+  },
   palette: {
     background: {
       default: '#fafafa',
@@ -16,16 +19,20 @@ const sharedTheme = {
         disableRipple: true,
       },
     },
-    MuiBottomNavigation: {
+    MuiButton: {
       styleOverrides: {
         root: {
-          backgroundColor: '#08B7C4',
+          borderRadius: '5px',
+          //padding: 3,
         },
       },
     },
-    MuiBottomNavigationAction: {
+    MuiButtonIcon: {
       styleOverrides: {
-        root: { '&.Mui-selected': { color: '#FFFFF' } },
+        root: {
+          color: '#08b7c4',
+          //padding: 3,
+        },
       },
     },
     MuiDivider: {
@@ -52,11 +59,14 @@ const themes: Record<Themes, ThemeOptions> = {
     palette: {
       mode: 'light',
       background: {
-        default: '#fafafa',
+        default: '#000',
         paper: '#fff',
       },
-      primary: {
+      secondary: {
         main: '#08B7C4',
+      },
+      primary: {
+        main: '#F44336',
       },
       color: '#111',
     },
@@ -69,8 +79,11 @@ const themes: Record<Themes, ThemeOptions> = {
         default: '#fafafa',
         paper: '#171717',
       },
-      primary: {
+      secondary: {
         main: '#08B7C4',
+      },
+      primary: {
+        main: '#F44336',
       },
     },
   }),

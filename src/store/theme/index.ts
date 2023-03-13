@@ -7,7 +7,7 @@ import type { Actions } from './types';
 
 const themeModeState = atom({
   key: 'theme-mode-state',
-  default: 'dark' as Themes,
+  default: 'light' as Themes,
   effects: [synchronizeWithLocalStorage],
 });
 
@@ -21,7 +21,7 @@ function useTheme(): [Themes, Actions] {
   const [themeMode, setThemeMode] = useRecoilState(themeModeState);
 
   function toggle() {
-    setThemeMode((mode: Themes) => (mode === Themes.DARK ? Themes.LIGHT : Themes.DARK));
+    setThemeMode((mode: Themes) => (mode === Themes.DARK ? Themes.DARK : Themes.LIGHT));
   }
 
   return [themeMode, { toggle }];
