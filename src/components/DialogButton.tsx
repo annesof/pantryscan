@@ -31,14 +31,15 @@ interface DialogProps {
   title: string;
   open: boolean;
   children?: ReactNode;
+  id: string;
   action: {
     name: string;
     Icon?: ElementType;
-    handleAction?: any;
+    handleAction?: () => void;
     label: string;
     disabled: boolean;
   };
-  setOpen: any;
+  setOpen: (value: boolean) => void;
 }
 
 function StyledDialogTitle(props: DialogTitleProps) {
@@ -65,16 +66,11 @@ function StyledDialogTitle(props: DialogTitleProps) {
   );
 }
 
-export const DialogButton = ({ title, children, action, open, setOpen }: DialogProps) => {
+export const DialogButton = ({ title, children, action, open, setOpen, id }: DialogProps) => {
   return (
     <>
-      <StyledDialog
-        fullWidth={true}
-        maxWidth={'md'}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <StyledDialogTitle id="customized-dialog-title" onClose={() => setOpen(false)}>
+      <StyledDialog fullWidth={true} maxWidth={'md'} open={open}>
+        <StyledDialogTitle id={id} onClose={() => setOpen(false)}>
           {title}
         </StyledDialogTitle>
         <DialogContent sx={{ padding: 10 }} onClick={(e) => e.stopPropagation()}>

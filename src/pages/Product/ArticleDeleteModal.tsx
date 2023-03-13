@@ -6,7 +6,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 import { useCallback } from 'react';
 interface ArticleDeleteModalProps {
-  handleClose: any;
+  handleClose: () => void;
   ean: string;
   id: number;
 }

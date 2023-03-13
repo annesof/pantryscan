@@ -34,11 +34,11 @@ interface DialogProps {
   action: {
     name: string;
     Icon: ElementType;
-    handleAction?: any;
+    handleAction?: () => void;
     label: string;
     disabled?: boolean;
   };
-  onCloseMenu: any;
+  onCloseMenu: () => void;
 }
 
 function StyledDialogTitle(props: DialogTitleProps) {
@@ -93,13 +93,13 @@ export const DialogMenu = ({ title, children, action }: DialogProps) => {
         {action.name}
       </MenuItem>
       <StyledDialog
-        fullWidth={true}
+        fullWidth
         maxWidth={'md'}
         onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+        aria-labelledby="dialog-title"
         open={open}
       >
-        <StyledDialogTitle id="customized-dialog-title" onClose={() => setOpen(false)}>
+        <StyledDialogTitle id="dialog-title" onClose={() => setOpen(false)}>
           {title}
         </StyledDialogTitle>
         <DialogContent onClick={(e) => e.stopPropagation()}>{children}</DialogContent>
@@ -113,11 +113,7 @@ export const DialogMenu = ({ title, children, action }: DialogProps) => {
           >
             {action.label}
           </Button>
-          <Button
-            //sx={{ color: 'common.white' }}
-            variant="outlined"
-            onClick={() => setOpen(false)}
-          >
+          <Button variant="outlined" onClick={() => setOpen(false)}>
             Annuler
           </Button>
         </DialogActions>

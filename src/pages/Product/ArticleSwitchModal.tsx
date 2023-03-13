@@ -9,7 +9,7 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import { Autocomplete, Stack, TextField } from '@mui/material';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 interface ArticleSwitchModalProps {
-  handleClose: any;
+  handleClose: () => void;
   ean: string;
   id: number;
 }

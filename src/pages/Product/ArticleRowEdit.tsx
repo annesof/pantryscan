@@ -157,7 +157,6 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
                 format="MM/yyyy"
                 slots={{
                   textField: CalendarInput,
-                  // inputAdornment: <InputAdornment position="start">kg</InputAdornment>,
                 }}
                 slotProps={{
                   actionBar: { actions: ['accept', 'cancel', 'clear'] },

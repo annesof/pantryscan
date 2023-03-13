@@ -1,7 +1,6 @@
 import { Block } from '@/components/Block';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
 import { Title } from '@/components/Title';
-import useOrientation from '@/hooks/useOrientation';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScannerRounded';
 import { Fab } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +10,7 @@ import { PreferredCategories } from './PreferredCategories';
 import { ProductListLast } from './ProductListLast';
 
 function Welcome() {
-  const isPortrait = useOrientation();
+  //const isPortrait = useOrientation();
   const navigate = useNavigate();
   return (
     <>

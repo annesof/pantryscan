@@ -73,6 +73,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
         <AddCircleRoundedIcon fontSize="large" onClick={() => setOpen(true)} />
       </Fab>
       <DialogButton
+        id="article_add"
         title="Ajout d'un article"
         open={open}
         setOpen={setOpen}
@@ -96,13 +97,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             loading={loadingLocations}
             sx={{ width: '70%' }}
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Emplacement"
-                size="small"
-                variant="standard"
-                //InputProps={{ sx: { fontSize: '0.9rem' } }}
-              />
+              <TextField {...params} label="Emplacement" size="small" variant="standard" />
             )}
           />
 

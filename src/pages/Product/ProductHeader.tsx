@@ -1,6 +1,6 @@
 import { Chip } from '@/components/Chip';
 import { Category, Product } from '@/types';
-import { Box, Stack, Typography, useMediaQuery } from '@mui/material';
+import { Badge, Box, Stack, Typography, useMediaQuery } from '@mui/material';
 import { useMemo } from 'react';
 
 export const ProductHeader = ({
@@ -37,12 +37,23 @@ export const ProductHeader = ({
           left: '50%',
         }}
       >
-        <img
-          src={product?.imageSmallUrl}
-          width="70px"
-          style={{ borderRadius: '10px', maxHeight: '85px' }}
-        />
+        <Badge
+          badgeContent={nbElements}
+          color="secondary"
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          sx={{ '& span': { color: 'white' } }}
+        >
+          <img
+            src={product?.imageSmallUrl}
+            width="70px"
+            style={{ borderRadius: '10px', maxHeight: '85px' }}
+          />
+        </Badge>
       </Box>
+
       <Box
         sx={{
           width: '100%',

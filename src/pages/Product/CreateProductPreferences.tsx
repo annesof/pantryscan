@@ -70,7 +70,6 @@ export const CreateProductPreferences = ({
         id="categories"
         options={categories}
         disableCloseOnSelect
-        //loading={loadingCategories}
         sx={{ width: 300 }}
         renderTags={(value, getTagProps) =>
           value.map((option, index: number) => (

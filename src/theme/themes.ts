@@ -23,7 +23,6 @@ const sharedTheme = {
       styleOverrides: {
         root: {
           borderRadius: '5px',
-          //padding: 3,
         },
       },
     },
@@ -31,7 +30,6 @@ const sharedTheme = {
       styleOverrides: {
         root: {
           color: '#08b7c4',
-          //padding: 3,
         },
       },
     },

@@ -22,7 +22,7 @@ function ScanPage() {
   });
 
   const onProductFound = useCallback(
-    (product: any) => {
+    (product: { ean: string }) => {
       if (product.ean === 'not-found') {
         return navigate(`/product/${product.ean}?code=${barcode}`);
       } else {
@@ -33,9 +33,8 @@ function ScanPage() {
   );
 
   const onInfoFetched = useCallback(
-    (data: any) => {
+    (data: { findOneProduct: { name: string; ean: string } }) => {
       if (data) {
-        //setAttempts((prevState) => prevState + 1);
         const { findOneProduct } = data;
         if (findOneProduct && findOneProduct.name !== 'notfound') {
           onProductFound(findOneProduct);

@@ -134,13 +134,7 @@ export const ProductArticles = ({
           </Grid>
         </Fragment>
       ))}
-      {idSelected && (
-        <Backdrop
-          sx={{ color: '#fff', zIndex: () => 900 }}
-          open={true}
-          //onClick={handleClose}
-        ></Backdrop>
-      )}
+      {idSelected && <Backdrop sx={{ color: '#fff', zIndex: () => 900 }} open={true} />}
     </Block>
   );
 };

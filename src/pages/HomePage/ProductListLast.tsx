@@ -37,7 +37,6 @@ export const ProductListLast = () => {
           <Box>
             <Typography
               sx={{
-                //flexGrow: 5,
                 textOverflow: 'ellipsis',
                 width: '250px',
                 display: 'inline-block',
