@@ -10,8 +10,8 @@ function Pages() {
       sx={{
         position: 'relative',
         height: 'auto',
-        top: '55px',
         marginTop: '25px',
+        width: '100%',
       }}
     >
       <Routes>

@@ -16,9 +16,9 @@ const routes: Routes = {
     icon: HomeIcon,
   },
   [Pages.Page1]: {
-    component: asyncComponentLoader(() => import('@/pages/Page1')),
-    path: '/page-1',
-    title: 'Page 1',
+    component: asyncComponentLoader(() => import('@/pages/Scan/ScanPage')),
+    path: '/scan',
+    title: 'Scan',
     icon: GitHubIcon,
   },
   [Pages.Page2]: {
@@ -37,6 +37,12 @@ const routes: Routes = {
     component: asyncComponentLoader(() => import('@/pages/Page4')),
     path: '/page-4',
     title: 'Page 4',
+    icon: BugReportIcon,
+  },
+  [Pages.Product]: {
+    component: asyncComponentLoader(() => import('@/pages/Product/Welcome')),
+    path: '/product/:ean',
+    title: 'Product',
     icon: BugReportIcon,
   },
   [Pages.NotFound]: {
