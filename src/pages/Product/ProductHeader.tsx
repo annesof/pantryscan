@@ -5,10 +5,10 @@ import { useMemo } from 'react';
 
 export const ProductHeader = ({
   product,
-  categories,
+  categories = [],
 }: {
   product: Product;
-  categories: Category[];
+  categories?: Category[];
 }) => {
   const small = useMediaQuery('(max-width:300px)');
 

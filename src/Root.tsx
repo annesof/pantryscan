@@ -14,6 +14,7 @@ const typeDefs = gql`
     sortBy: String = "NAME"
     take: Int = 10
     withFoods: Boolean = false
+    userId: Int = 1
   }
 `;
 

@@ -6,7 +6,10 @@ export const GET_PRODUCT_PREFERENCES_USER = gql`
       contentUnit {
         name
       }
-      categories
+      categories {
+        id
+        name
+      }
       location {
         id
         name
@@ -43,7 +46,7 @@ export const GET_PRODUCT_CODE = gql`
   }
 `;
 
-export const GET_LAST_PRODUCTS = gql`
+export const GET_PRODUCTS = gql`
   query getLastProducts($fetchProductsArgs: FetchProductsArgs!) {
     findProducts(fetchProductsArgs: $fetchProductsArgs) {
       ean
@@ -51,6 +54,12 @@ export const GET_LAST_PRODUCTS = gql`
       brand
       imageSmallUrl
       quantity
+      articles {
+        location {
+          id
+        }
+        quantity
+      }
     }
   }
 `;

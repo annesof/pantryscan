@@ -1,9 +1,8 @@
 import HomeIcon from '@mui/icons-material/HomeRounded';
 import PageviewRoundedIcon from '@mui/icons-material/PageviewRounded';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScannerRounded';
-//import { default as SearchIcon } from '@mui/icons-material/Search';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 
@@ -22,6 +21,7 @@ const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
 export function BottomMenu() {
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
+  const match = useLocation();
   return (
     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
       <BottomNavigation
@@ -40,7 +40,7 @@ export function BottomMenu() {
         <BottomNavigationAction
           label="Recherche"
           icon={<PageviewRoundedIcon />}
-          onClick={() => navigate(`/`)}
+          onClick={() => navigate(`/search`)}
         />
       </BottomNavigation>
     </Paper>

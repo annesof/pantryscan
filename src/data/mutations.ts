@@ -28,6 +28,7 @@ export const ADD_ARTICLES = gql`
     $idLocation: String!
     $quantity: Float!
     $expirationDate: Timestamp
+    $idUser: Float!
   ) {
     createArticle(
       createArticleInput: {
@@ -35,6 +36,7 @@ export const ADD_ARTICLES = gql`
         idLocation: $idLocation
         quantity: $quantity
         expirationDate: $expirationDate
+        idUser: $idUser
       }
     ) {
       id
