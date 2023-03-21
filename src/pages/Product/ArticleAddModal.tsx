@@ -60,6 +60,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
           quantity: Number(quantity),
           idLocation: selectedLocation.id,
           eanProduct: userProductPref?.product.ean,
+          idUser: 1,
           ...(expDate && { expirationDate: fromUnixTime(expDate / 1000) }),
         },
       });
@@ -69,7 +70,13 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
 
   return (
     <>
-      <Fab sx={{ color: 'common.white' }} aria-label="scan" color="primary">
+      <Fab
+        sx={{ color: 'common.white' }}
+        size="medium"
+        aria-label="scan"
+        variant="extended"
+        color="primary"
+      >
         <AddCircleRoundedIcon fontSize="large" onClick={() => setOpen(true)} />
       </Fab>
       <DialogButton

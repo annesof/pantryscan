@@ -43,13 +43,6 @@ function Welcome() {
     },
   });
 
-  const productCategoryList = useMemo(() => {
-    if (userProductPref && categoryList.length !== 0) {
-      return categoryList.filter((element) => userProductPref.categories.includes(element.id));
-    }
-    return [];
-  }, [userProductPref, categoryList]);
-
   const articlesByLocation: { [key: string]: Article[] } = useMemo(() => {
     if (product && product.articles) {
       return product.articles.reduce((group: { [key: string]: Article[] }, article: Article) => {
@@ -70,7 +63,7 @@ function Welcome() {
     <>
       <FullSizeDecenteredFlexBox>
         <Block>
-          {product && <ProductHeader product={product} categories={productCategoryList} />}
+          {product && <ProductHeader product={product} categories={userProductPref?.categories} />}
           {errorPreferences && product && (
             <CreateProductPreferences
               ean={product?.ean}

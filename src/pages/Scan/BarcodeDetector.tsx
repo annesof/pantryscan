@@ -8,7 +8,7 @@ interface BarcodeDetectorProps {
   canvasSize?: { width: string; height: string };
 }
 
-const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: BarcodeDetectorProps) => {
+export const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: BarcodeDetectorProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -68,5 +68,3 @@ const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: BarcodeDetect
     </div>
   );
 };
-
-export default BarcodeDetector;

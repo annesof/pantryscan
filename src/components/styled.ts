@@ -15,7 +15,7 @@ const FullSizeCenteredFlexBox = styled(CenteredFlexBox)({
   height: '100%',
   padding: '15px',
   paddingTop: 0,
-  marginTop: '-50px',
+  marginTop: '-20px',
 });
 
 const FullSizeDecenteredFlexBox = styled(CenteredFlexBox)(({ theme }) => ({
