@@ -3,7 +3,7 @@ import { ADD_ARTICLES } from '@/data/mutations';
 import { GET_ALL_LOCATIONS, GET_PRODUCT_PREFERENCES_USER } from '@/data/queries';
 
 import { Location, UserProductPreferences } from '@/types';
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { Autocomplete, Fab, Stack, TextField, TextFieldProps } from '@mui/material';
 import { DatePicker, frFR, LocalizationProvider } from '@mui/x-date-pickers';
@@ -37,8 +37,10 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
   );
   const [quantity, setQuantity] = useState<string>();
   const [expDate, setExpDate] = useState<number | null>(null);
-  const { loading: loadingLocations, data: locations } = useQuery(GET_ALL_LOCATIONS);
-  const locationList: Location[] = locations?.findAllLocations || [];
+
+  const [locationList, setLocationList] = useState<Location[]>([]);
+  //const { loading: loadingLocations, data: locations } = useQuery(GET_ALL_LOCATIONS);
+  //const locationList: Location[] = locations?.findAllLocations || [];
 
   const [saveArticles] = useMutation(ADD_ARTICLES, {
     refetchQueries: [
@@ -49,9 +51,18 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
     ],
   });
 
+  const [getAllLocation] = useLazyQuery(GET_ALL_LOCATIONS, {
+    onCompleted: (data) => {
+      setLocationList(data.findAllLocations);
+    },
+  });
+
   useEffect(() => {
     userProductPref?.location && setSelectedLocation(userProductPref.location);
-  }, [userProductPref]);
+    if (open) {
+      getAllLocation();
+    }
+  }, [userProductPref, open]);
 
   const onSubmit = useCallback(() => {
     if (selectedLocation && quantity) {
@@ -72,12 +83,14 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
     <>
       <Fab
         sx={{ color: 'common.white' }}
-        size="medium"
+        size="small"
         aria-label="scan"
         variant="extended"
         color="primary"
+        onClick={() => setOpen(true)}
       >
-        <AddCircleRoundedIcon fontSize="large" onClick={() => setOpen(true)} />
+        <AddCircleRoundedIcon fontSize="small" sx={{ mr: 1 }} />
+        emplacement
       </Fab>
       <DialogButton
         id="article_add"
@@ -101,7 +114,6 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             isOptionEqualToValue={(option, value) => option.id === value.id}
             options={locationList}
             value={selectedLocation}
-            loading={loadingLocations}
             sx={{ width: '70%' }}
             renderInput={(params) => (
               <TextField {...params} label="Emplacement" size="small" variant="standard" />

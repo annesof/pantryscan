@@ -1,0 +1,16 @@
+{
+  "errors": [
+    {
+      "message": "UserProductSettings not found for ean 25 and idUser 1",
+      "extensions": {
+        "code": "404",
+        "response": {
+          "statusCode": 404,
+          "message": "UserProductSettings not found for ean 25 and idUser 1",
+          "error": "Not Found"
+        }
+      }
+    }
+  ],
+  "data": null
+}

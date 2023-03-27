@@ -1,0 +1,12 @@
+{
+  "data": {
+    "findOneProduct": {
+      "ean": "4006985902304",
+      "name": "L'Original - Cacao en poudre non sucré",
+      "brand": "Van houten",
+      "imageSmallUrl": "https://images.openfoodfacts.org/images/products/400/698/590/2304/front_fr.149.100.jpg",
+      "quantity": "250 g",
+      "__typename": "Product"
+    }
+  }
+}

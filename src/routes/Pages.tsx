@@ -10,7 +10,6 @@ function Pages() {
       sx={{
         position: 'relative',
         height: 'auto',
-        marginTop: '25px',
         width: '100%',
       }}
     >

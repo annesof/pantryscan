@@ -1,0 +1,9 @@
+{
+  "data": {
+    "findAllLocations": [
+      { "id": "PHAUT", "name": "Placard haut", "__typename": "Location" },
+      { "id": "CEL", "name": "Cellier", "__typename": "Location" },
+      { "id": "CONG", "name": "Congélateur", "__typename": "Location" }
+    ]
+  }
+}

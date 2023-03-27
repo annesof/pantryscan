@@ -24,8 +24,8 @@ const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
     <>
       <IconButton
         sx={{
-          background: '#08B7C4',
-          color: 'white',
+          //background: '#08B7C4',
+          color: '#08B7C4',
           '&:hover': { background: '#08B7C4' },
         }}
         aria-label="more"
@@ -108,8 +108,8 @@ export const ProductArticles = ({
                     <Grid xs={4} sx={{ textAlign: 'right' }}>
                       <IconButton
                         sx={{
-                          background: '#08B7C4',
-                          color: 'white',
+                          //background: '#08B7C4',
+                          color: '#08B7C4',
                           '&:hover': { background: '#08B7C4' },
                         }}
                         aria-label="edit"

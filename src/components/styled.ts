@@ -21,12 +21,16 @@ const FullSizeCenteredFlexBox = styled(CenteredFlexBox)({
 const FullSizeDecenteredFlexBox = styled(CenteredFlexBox)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     width: '100%',
-  },
-  [theme.breakpoints.up('md')]: {
-    width: '50%',
+    //marginTop: '5px',
   },
   height: '100%',
-  marginTop: '20px',
+
+  [theme.breakpoints.up('md')]: {
+    width: '70%',
+    marginRight: '300px',
+    marginLeft: '300px',
+    marginTop: '20px',
+  },
   padding: '15px',
 }));
 

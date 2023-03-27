@@ -109,7 +109,12 @@ export const CreateProductPreferences = ({
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Unité" size="small" />}
       />
-      <Button variant="contained" onClick={() => buildAndSavePreferences()} disabled={errorForm}>
+      <Button
+        id="next"
+        variant="contained"
+        onClick={() => buildAndSavePreferences()}
+        disabled={errorForm}
+      >
         Suivant
       </Button>
     </Stack>
