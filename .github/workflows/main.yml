@@ -17,17 +17,17 @@ jobs:
       - name: Run Cypress Test
         uses: cypress-io/github-action@v4
         with:
-         command: npx cypress run
-         browser: chrome
-      - name: Upload screenshots 
+          command: npx cypress run
+          browser: chrome
+      - name: Upload screenshots
         uses: actions/upload-artifact@v2
         if: failure()
         with:
-         name: cypress-screenshots
-         path: ./cypress/screenshots
-      - name: Upload videos 
-         uses: actions/upload-artifact@v2
-         if: always()
-         with:
+          name: cypress-screenshots
+          path: ./cypress/screenshots
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
           name: cypress-videos
-          path: ./cypress/videos 
+          path: ./cypress/videos
