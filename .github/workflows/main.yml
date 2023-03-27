@@ -27,6 +27,7 @@ jobs:
       - name: Run Cypress Test
         uses: cypress-io/github-action@v5.5.1
         with:
+          start: pnpm run start
           command: npx cypress run
           browser: chrome
       - name: Upload screenshots
