@@ -22,6 +22,7 @@ const CalendarInput = function BrowserInput(props: TextFieldProps) {
       size="small"
       variant="standard"
       margin="none"
+      id="date"
       InputLabelProps={{
         shrink: true,
       }}
@@ -88,6 +89,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
         variant="extended"
         color="primary"
         onClick={() => setOpen(true)}
+        id="add_location"
       >
         <AddCircleRoundedIcon fontSize="small" sx={{ mr: 1 }} />
         emplacement
@@ -127,6 +129,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             value={quantity}
             sx={{ width: '70%' }}
             variant="standard"
+            id="quantity"
             onChange={(e) => setQuantity(e.target.value)}
             InputProps={{ sx: { fontSize: '0.9rem' } }}
           />
