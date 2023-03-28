@@ -30,6 +30,8 @@ jobs:
           start: pnpm run dev
           command: npx cypress run
           browser: chrome
+          wait-on: http://localhost:5173
+          wait-on-timeout: 500
       - name: Upload screenshots
         uses: actions/upload-artifact@v2
         if: failure()
