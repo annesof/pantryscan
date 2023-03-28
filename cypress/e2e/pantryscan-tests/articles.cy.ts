@@ -6,7 +6,7 @@ describe('add  preferences product', () => {
     cy.interceptGql('getByProductAndUser', 'getByProductAndUser/4006985902304');
     cy.interceptGql('getProduct', 'getProduct/4006985902304');
     //cy.interceptGql('getAllCategories', 'getAllCategories/data');
-    //cy.interceptGql('getAllLocations', 'getAllLocations/data');
+    cy.interceptGql('getAllLocations', 'getAllLocations/data');
     //cy.interceptGql('createUserProductSettings', 'createUserProductSettings/4006985902304');
 
     cy.visit('http://localhost:5173/product/4006985902304');
