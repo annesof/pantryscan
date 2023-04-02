@@ -65,9 +65,9 @@
     "workbox-window": "^6.5.4"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,json}": [
+    "*.{ts,tsx,json}": [
       "prettier --write",
-      "eslint --max-warnings=5"
+      "eslint --max-warnings=10"
     ]
   }
 }

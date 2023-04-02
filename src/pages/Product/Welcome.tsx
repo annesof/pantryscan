@@ -31,7 +31,7 @@ function Welcome() {
       setCategoryList(data?.findAllCategories);
     },
   });
-  const { error: errorPreferences, data } = useQuery(GET_PRODUCT_PREFERENCES_USER, {
+  const { error: errorPreferences } = useQuery(GET_PRODUCT_PREFERENCES_USER, {
     variables: { idUser: 1, ean },
     onCompleted: (data) => {
       setUserProductPref(data?.findByProductAndUser);
