@@ -17,5 +17,5 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: 'ssh://dokku@dokku.tuxwin.fr:3022/pantryscan'
+          git_remote_url: 'ssh://dokku@dokku.tuxwin.fr:3022/pantryscan2'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_DOKKU }}
