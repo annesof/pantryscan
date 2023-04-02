@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-import { aliasQuery, aliasMutation, hasOperationName } from '../../utils/graphql-test-utils';
 
 describe('add  preferences product', () => {
   it('product preferences not found', () => {

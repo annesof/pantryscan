@@ -39,10 +39,16 @@ const CalendarInput = (props: TextFieldProps) => {
       InputLabelProps={{
         shrink: true,
       }}
+      id="expirationDate"
       color="secondary"
       InputProps={{
         ...props.InputProps,
-        sx: { fontSize: '0.9rem', height: '1em', color: 'white' },
+        sx: {
+          fontSize: '0.9rem',
+          height: '1em',
+          color: 'white',
+          '& button>svg': { color: 'white', marginBottom: '10px', fontSize: '18px' },
+        },
       }}
     />
   );
@@ -106,6 +112,7 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
                   verticalAlign: 'top',
                 }}
                 size="small"
+                id="substractOne"
                 onClick={() =>
                   setQuantityLocal((qty) => {
                     if (!qty || qty === 0) return 0;
@@ -121,9 +128,9 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
                 sx={{ width: '25px' }}
                 InputProps={{ sx: { fontSize: '0.9rem', height: '1em', color: 'white' } }}
                 size="small"
-                type="number"
+                id="quantity_editable"
                 variant="standard"
-                inputProps={{ min: 0 }}
+                inputProps={{ min: 0, inputMode: 'numeric', pattern: '[0-9]*' }}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                   setQuantityLocal(event.target.value === '' ? 0 : Number(event.target.value));
                 }}
@@ -138,6 +145,7 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
                   verticalAlign: 'top',
                 }}
                 size="small"
+                id="addOne"
                 onClick={() => setQuantityLocal((qty) => qty + 1)}
               >
                 <AddIcon fontSize="inherit" />
@@ -162,7 +170,7 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
                   actionBar: { actions: ['accept', 'cancel', 'clear'] },
                 }}
                 value={expDate}
-                onChange={(newValue) => {
+                onChange={(newValue: any) => {
                   setExpDate(newValue || undefined);
                 }}
                 onError={() => console.log('pb')}

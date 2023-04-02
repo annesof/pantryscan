@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-import { aliasQuery, aliasMutation } from '../../utils/graphql-test-utils';
 
 describe('scan redirects', () => {
   it('product preferences not found', () => {

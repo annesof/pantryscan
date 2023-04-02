@@ -13,7 +13,7 @@ function Welcome() {
   return (
     <>
       <FullSizeDecenteredFlexBox flexDirection={'column'} sx={{ marginTop: -5 }}>
-        <img src={Logo} alt="icon" width="200px" />
+        <img src={Logo} alt="logo" id="logo-pantryscan" width="200px" />
         <Block>
           <Title>Derniers ajouts</Title>
           <ProductListLast />

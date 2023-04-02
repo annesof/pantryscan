@@ -1,0 +1,37 @@
+{
+  "data": {
+    "findByProductAndUser": {
+      "contentUnit": { "name": "boîte(s)", "__typename": "ContentUnit" },
+      "categories": [
+        { "id": "1", "name": "Petit Dej", "__typename": "Category" },
+        { "id": "5", "name": "Chocolat", "__typename": "Category" }
+      ],
+      "location": { "id": "CEL", "name": "Cellier", "__typename": "Location" },
+      "product": {
+        "ean": "4006985902304",
+        "name": "L'Original - Cacao en poudre non sucré",
+        "brand": "Van houten",
+        "imageSmallUrl": "https://images.openfoodfacts.org/images/products/400/698/590/2304/front_fr.149.100.jpg",
+        "quantity": "250 g",
+        "articles": [
+          {
+            "id": "16",
+            "quantity": 1,
+            "expirationDate": 1735462431000,
+            "location": { "id": "PHAUT", "name": "Placard haut", "__typename": "Location" },
+            "__typename": "Article"
+          },
+          {
+            "id": "17",
+            "quantity": 1,
+            "expirationDate": 1735462431000,
+            "location": { "id": "CEL", "name": "Cellier", "__typename": "Location" },
+            "__typename": "Article"
+          }
+        ],
+        "__typename": "Product"
+      },
+      "__typename": "UserProductSettings"
+    }
+  }
+}

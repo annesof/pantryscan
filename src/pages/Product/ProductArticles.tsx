@@ -26,7 +26,7 @@ const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
         sx={{
           //background: '#08B7C4',
           color: '#08B7C4',
-          '&:hover': { background: '#08B7C4' },
+          '&:hover': { color: 'white', background: '#08B7C4' },
         }}
         aria-label="more"
         size="small"
@@ -67,7 +67,7 @@ export const ProductArticles = ({
     <Block>
       {Object.keys(articles).map((key) => (
         <Fragment key={key}>
-          <Title>{key}</Title>
+          <Title id={key}>{key}</Title>
           <Grid container spacing={1}>
             {articles[key].map(({ id, expirationDate, quantity }, index) => (
               <Fragment key={id}>
@@ -110,8 +110,9 @@ export const ProductArticles = ({
                         sx={{
                           //background: '#08B7C4',
                           color: '#08B7C4',
-                          '&:hover': { background: '#08B7C4' },
+                          '&:hover': { color: 'white', background: '#08B7C4' },
                         }}
+                        id={`edit-${id}`}
                         aria-label="edit"
                         size="small"
                         onClick={() => {

@@ -28,7 +28,7 @@ const styles = (isXs: boolean) => {
 function App() {
   const matches = useMediaQuery('(max-width:480px)');
   return (
-    <Box sx={styles(matches)}>
+    <Box id="box-container" sx={styles(matches)}>
       <CssBaseline />
       <Notifications />
       <SW />

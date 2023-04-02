@@ -36,12 +36,10 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(
     userProductPref?.location || null,
   );
-  const [quantity, setQuantity] = useState<string>();
+  const [quantity, setQuantity] = useState<string>('');
   const [expDate, setExpDate] = useState<number | null>(null);
 
   const [locationList, setLocationList] = useState<Location[]>([]);
-  //const { loading: loadingLocations, data: locations } = useQuery(GET_ALL_LOCATIONS);
-  //const locationList: Location[] = locations?.findAllLocations || [];
 
   const [saveArticles] = useMutation(ADD_ARTICLES, {
     refetchQueries: [
@@ -63,7 +61,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
     if (open) {
       getAllLocation();
     }
-  }, [userProductPref, open]);
+  }, [userProductPref, open, getAllLocation]);
 
   const onSubmit = useCallback(() => {
     if (selectedLocation && quantity) {
@@ -126,7 +124,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             label={userProductPref?.contentUnit.name}
             size="small"
             type="number"
-            value={quantity}
+            value={quantity || ''}
             sx={{ width: '70%' }}
             variant="standard"
             id="quantity"
