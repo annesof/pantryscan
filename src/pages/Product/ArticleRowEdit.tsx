@@ -6,13 +6,14 @@ import AddIcon from '@mui/icons-material/AddCircleRounded';
 import CheckIcon from '@mui/icons-material/CheckRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import MinusIcon from '@mui/icons-material/RemoveCircleRounded';
-import { IconButton, Stack, TextField, TextFieldProps, Typography } from '@mui/material';
+import { IconButton, Stack, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import { DatePicker, frFR, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+
 import { getTime } from 'date-fns';
 import { ChangeEvent, forwardRef, useCallback, useState } from 'react';
+
+import { DatePicker } from '@/components/Datepicker/Datepicker';
 
 const WhiteTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -29,31 +30,6 @@ const WhiteTextField = styled(TextField)({
   },
 });
 
-const CalendarInput = (props: TextFieldProps) => {
-  return (
-    <WhiteTextField
-      {...props}
-      size="small"
-      variant="standard"
-      margin="none"
-      InputLabelProps={{
-        shrink: true,
-      }}
-      id="expirationDate"
-      color="secondary"
-      InputProps={{
-        ...props.InputProps,
-        sx: {
-          fontSize: '0.9rem',
-          height: '1em',
-          color: 'white',
-          '& button>svg': { color: 'white', marginBottom: '10px', fontSize: '18px' },
-        },
-      }}
-    />
-  );
-};
-
 interface Props {
   id: number;
   ean: string;
@@ -65,7 +41,9 @@ interface Props {
 export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
   ({ id, ean, quantity, expirationDate, setIdSelected, hidden }: Props, ref) => {
     const [quantityLocal, setQuantityLocal] = useState<number>(quantity || 0);
-    const [expDate, setExpDate] = useState<number | undefined>(expirationDate);
+    const [expDate, setExpDate] = useState<Date | null>(
+      expirationDate ? new Date(expirationDate) : null,
+    );
     const [updateArticle] = useMutation(UPDATE_ARTICLES, {
       refetchQueries: [
         {
@@ -154,29 +132,15 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
           </Stack>
         </Grid>
         <Grid xs={4} sx={{ textAlign: 'right' }}>
-          <Stack direction="column" sx={{ textAlign: 'left', color: 'white' }}>
-            <Typography variant="caption">Expire</Typography>
-            <LocalizationProvider
-              dateAdapter={AdapterDateFns}
-              localeText={frFR.components.MuiLocalizationProvider.defaultProps.localeText}
-            >
-              <DatePicker
-                views={['month', 'year']}
-                format="MM/yyyy"
-                slots={{
-                  textField: CalendarInput,
-                }}
-                slotProps={{
-                  actionBar: { actions: ['accept', 'cancel', 'clear'] },
-                }}
-                value={expDate}
-                onChange={(newValue: any) => {
-                  setExpDate(newValue || undefined);
-                }}
-                onError={() => console.log('pb')}
-              />
-            </LocalizationProvider>
-          </Stack>
+          <DatePicker
+            selected={expDate}
+            id="expirationDate"
+            label="Expire"
+            onChange={(date) => setExpDate(date)}
+            dateFormat="MM/yyyy"
+            showMonthYearPicker
+            showYearDropdown
+          />
         </Grid>
         <Grid xs={4} sx={{ textAlign: 'right' }}>
           <IconButton

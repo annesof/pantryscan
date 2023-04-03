@@ -76,10 +76,9 @@ describe('Articles management', () => {
     cy.get('button#substractOne').click();
     cy.get('input#quantity_editable').should('have.value', 2);
 
-    cy.get('input#expirationDate').should('be.visible');
-    cy.get('[data-testid=CalendarIcon]').click();
-    cy.get('button.MuiPickersMonth-monthButton').contains('May').click();
-    cy.get('button.MuiPickersYear-yearButton').contains('2029').click();
+    cy.get('input#expirationDate').should('be.visible').should('have.value', '12/2024');
+    cy.get('input#expirationDate').clear().type('11/2025');
+    cy.contains('nov.').click();
 
     //cy.get('input#expirationDate').click();
 
