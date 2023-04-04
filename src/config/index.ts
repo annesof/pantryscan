@@ -2,11 +2,9 @@ import isMobile from '@/utils/is-mobile';
 
 import type { Notifications } from './types';
 
-const title = 'React PWA';
+const title = 'Pantryscan';
 
-const email = 'auther-email@gmail.com';
-
-const repository = 'https://github.com/suren-atoyan/react-pwa';
+const email = 'asdeguelle@gmail.com';
 
 const messages = {
   app: {
@@ -46,20 +44,6 @@ const loader = {
   minimumLoading: 700, // but if it appears, it will stay for at least 700 milliseconds
 };
 
-const defaultMetaTags = {
-  image: '/cover.png',
-  description: 'Starter kit for modern web applications',
-};
 const giphy404 = 'https://giphy.com/embed/xTiN0L7EW5trfOvEk0';
 
-export {
-  loader,
-  notifications,
-  dateFormat,
-  messages,
-  repository,
-  email,
-  title,
-  defaultMetaTags,
-  giphy404,
-};
+export { loader, notifications, dateFormat, messages, email, title, giphy404 };

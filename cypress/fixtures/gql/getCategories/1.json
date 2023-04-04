@@ -1,0 +1,11 @@
+{
+  "data": {
+    "findOneUser": {
+      "favoriteCategories": [
+        { "id": "7", "name": "Féculents", "color": "#fff59d", "__typename": "Category" },
+        { "id": "14", "name": "Viande", "color": "#ef9a9a", "__typename": "Category" }
+      ],
+      "__typename": "User"
+    }
+  }
+}

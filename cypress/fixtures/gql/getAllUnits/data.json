@@ -1,0 +1,8 @@
+{
+  "data": {
+    "findAllUnits": [
+      { "id": "1", "name": "pièces(s)", "__typename": "ContentUnit" },
+      { "id": "2", "name": "boîte(s)", "__typename": "ContentUnit" }
+    ]
+  }
+}

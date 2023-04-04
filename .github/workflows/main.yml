@@ -1,0 +1,49 @@
+name: Cypress Tests with Dependency and Artifact Caching
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  # install:
+  # ....
+  cypress-run:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.16.0-chrome105-ff104-edge
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: ⎔ Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.30.3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'pnpm'
+
+      - name: Run Cypress Test
+        uses: cypress-io/github-action@v5.5.1
+        with:
+          start: pnpm run dev
+          command: npx cypress run
+          browser: chrome
+          wait-on: http://localhost:5173
+          wait-on-timeout: 500
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./cypress/screenshots
+      - name: Upload videos
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: ./cypress/videos

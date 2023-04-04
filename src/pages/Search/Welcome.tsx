@@ -1,7 +1,7 @@
 import { Block } from '@/components/Block';
 import { Chip } from '@/components/Chip';
 import { ProductRow } from '@/components/ProductRow';
-import { FullSizeCenteredFlexBox } from '@/components/styled';
+import { FullSizeDecenteredFlexBox } from '@/components/styled';
 import { Title } from '@/components/Title';
 import { GET_ALL_CATEGORIES, GET_ALL_LOCATIONS, GET_PRODUCTS } from '@/data/queries';
 import { Category, Location, Product } from '@/types';
@@ -74,14 +74,25 @@ function TabContent({ locationId, categories }: { locationId?: string; categorie
     }
   }, [loading, error, data]);
 
-  if (loading) return <span>Chargement...</span>;
   if (error) return <span>Error!</span>;
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-      {content?.map((product: Product) => (
-        <ProductRow key={product.ean} product={product} locationId={locationId} />
-      ))}
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        //justifyContent: 'space-around',
+        height: '500px',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        paddingTop: '15px',
+      }}
+    >
+      {loading && <span>Chargement...</span>}
+      {!loading &&
+        content?.map((product: Product) => (
+          <ProductRow key={product.ean} product={product} locationId={locationId} />
+        ))}
     </Box>
   );
 }
@@ -138,7 +149,7 @@ function Welcome() {
 
   return (
     <>
-      <FullSizeCenteredFlexBox>
+      <FullSizeDecenteredFlexBox>
         <Block>
           <Title>Recherche</Title>
           <Stack spacing={1}>
@@ -199,7 +210,7 @@ function Welcome() {
             </SwipeableViews>
           </Stack>
         </Block>
-      </FullSizeCenteredFlexBox>
+      </FullSizeDecenteredFlexBox>
     </>
   );
 }

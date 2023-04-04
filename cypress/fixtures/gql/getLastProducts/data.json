@@ -1,0 +1,41 @@
+{
+  "data": {
+    "findProducts": [
+      {
+        "ean": "4006985902304",
+        "name": "L'Original - Cacao en poudre non sucré",
+        "brand": "Van houten",
+        "imageSmallUrl": "https://images.openfoodfacts.org/images/products/400/698/590/2304/front_fr.149.100.jpg",
+        "quantity": "250 g",
+        "articles": [
+          {
+            "location": { "id": "CEL", "__typename": "Location" },
+            "quantity": 5,
+            "__typename": "Article"
+          },
+          {
+            "location": { "id": "PHAUT", "__typename": "Location" },
+            "quantity": 1,
+            "__typename": "Article"
+          }
+        ],
+        "__typename": "Product"
+      },
+      {
+        "ean": "3250390105220",
+        "name": "Confiture extra de fraises",
+        "brand": "Paquito,Intermarché",
+        "imageSmallUrl": "https://images.openfoodfacts.org/images/products/325/039/010/5220/front_fr.41.100.jpg",
+        "quantity": "370 g",
+        "articles": [
+          {
+            "location": { "id": "PHAUT", "__typename": "Location" },
+            "quantity": 2,
+            "__typename": "Article"
+          }
+        ],
+        "__typename": "Product"
+      }
+    ]
+  }
+}

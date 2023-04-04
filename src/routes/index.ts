@@ -1,7 +1,3 @@
-import BugReportIcon from '@mui/icons-material/BugReport';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import HomeIcon from '@mui/icons-material/Home';
-
 import asyncComponentLoader from '@/utils/loader';
 
 import { Pages, Routes } from './types';

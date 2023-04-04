@@ -33,6 +33,7 @@ export const ScanManual = ({ error }: { error: boolean }) => {
         <Button
           sx={{ color: 'common.white' }}
           variant="contained"
+          id="send_code"
           onClick={() => {
             barcodeInput && navigate(`/product/${barcodeInput}`);
           }}

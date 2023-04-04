@@ -36,14 +36,14 @@ function SW() {
       });
     } else if (needRefresh) {
       notificationKey.current = notificationsActions.push({
-        message: 'New content is available, click on reload button to update.',
+        message: 'Nouveau contenu disponible, click on reload button to update.',
         options: {
           variant: 'warning',
           persist: true,
           action: (
             <>
-              <Button onClick={() => updateServiceWorker(true)}>Reload</Button>
-              <Button onClick={close}>Close</Button>
+              <Button onClick={() => updateServiceWorker(true)}>Rechargement</Button>
+              <Button onClick={close}>Fermer</Button>
             </>
           ),
         },

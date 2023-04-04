@@ -2,13 +2,11 @@ import { DialogButton } from '@/components/DialogButton';
 import { ADD_ARTICLES } from '@/data/mutations';
 import { GET_ALL_LOCATIONS, GET_PRODUCT_PREFERENCES_USER } from '@/data/queries';
 
+import { DatePicker } from '@/components/Datepicker/Datepicker';
 import { Location, UserProductPreferences } from '@/types';
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { Autocomplete, Fab, Stack, TextField, TextFieldProps } from '@mui/material';
-import { DatePicker, frFR, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { fromUnixTime } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 
 interface Props {
@@ -22,6 +20,7 @@ const CalendarInput = function BrowserInput(props: TextFieldProps) {
       size="small"
       variant="standard"
       margin="none"
+      id="date"
       InputLabelProps={{
         shrink: true,
       }}
@@ -35,10 +34,10 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(
     userProductPref?.location || null,
   );
-  const [quantity, setQuantity] = useState<string>();
-  const [expDate, setExpDate] = useState<number | null>(null);
-  const { loading: loadingLocations, data: locations } = useQuery(GET_ALL_LOCATIONS);
-  const locationList: Location[] = locations?.findAllLocations || [];
+  const [quantity, setQuantity] = useState<string>('');
+  const [expDate, setExpDate] = useState<Date | null>(null);
+
+  const [locationList, setLocationList] = useState<Location[]>([]);
 
   const [saveArticles] = useMutation(ADD_ARTICLES, {
     refetchQueries: [
@@ -49,9 +48,18 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
     ],
   });
 
+  const [getAllLocation] = useLazyQuery(GET_ALL_LOCATIONS, {
+    onCompleted: (data) => {
+      setLocationList(data.findAllLocations);
+    },
+  });
+
   useEffect(() => {
     userProductPref?.location && setSelectedLocation(userProductPref.location);
-  }, [userProductPref]);
+    if (open) {
+      getAllLocation();
+    }
+  }, [userProductPref, open, getAllLocation]);
 
   const onSubmit = useCallback(() => {
     if (selectedLocation && quantity) {
@@ -61,7 +69,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
           idLocation: selectedLocation.id,
           eanProduct: userProductPref?.product.ean,
           idUser: 1,
-          ...(expDate && { expirationDate: fromUnixTime(expDate / 1000) }),
+          ...(expDate && { expirationDate: expDate }),
         },
       });
       setOpen(false);
@@ -72,12 +80,15 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
     <>
       <Fab
         sx={{ color: 'common.white' }}
-        size="medium"
+        size="small"
         aria-label="scan"
         variant="extended"
         color="primary"
+        onClick={() => setOpen(true)}
+        id="add_location"
       >
-        <AddCircleRoundedIcon fontSize="large" onClick={() => setOpen(true)} />
+        <AddCircleRoundedIcon fontSize="small" sx={{ mr: 1 }} />
+        emplacement
       </Fab>
       <DialogButton
         id="article_add"
@@ -101,7 +112,6 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             isOptionEqualToValue={(option, value) => option.id === value.id}
             options={locationList}
             value={selectedLocation}
-            loading={loadingLocations}
             sx={{ width: '70%' }}
             renderInput={(params) => (
               <TextField {...params} label="Emplacement" size="small" variant="standard" />
@@ -112,34 +122,23 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             label={userProductPref?.contentUnit.name}
             size="small"
             type="number"
-            value={quantity}
+            value={quantity || ''}
             sx={{ width: '70%' }}
             variant="standard"
+            id="quantity"
             onChange={(e) => setQuantity(e.target.value)}
             InputProps={{ sx: { fontSize: '0.9rem' } }}
           />
-
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-            localeText={frFR.components.MuiLocalizationProvider.defaultProps.localeText}
-          >
-            <DatePicker
-              views={['month', 'year']}
-              format="MM/yyyy"
-              label="Date de péremption"
-              slots={{
-                textField: CalendarInput,
-              }}
-              slotProps={{
-                actionBar: { actions: ['accept', 'cancel', 'clear'] },
-              }}
-              value={expDate}
-              onChange={(newValue) => {
-                setExpDate(newValue);
-              }}
-              onError={() => console.log('pb')}
-            />
-          </LocalizationProvider>
+          <DatePicker
+            selected={expDate}
+            id="date"
+            label="Date de péremption"
+            onChange={(date) => setExpDate(date)}
+            dateFormat="MM/yyyy"
+            showMonthYearPicker
+            showYearDropdown
+            small={false}
+          />
         </Stack>
       </DialogButton>
     </>

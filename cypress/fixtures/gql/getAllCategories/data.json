@@ -1,0 +1,41 @@
+{
+  "data": {
+    "findAllCategories": [
+      { "id": "1", "name": "Petit Dej", "color": null, "__typename": "Category" },
+      { "id": "2", "name": "Biscuit", "color": null, "__typename": "Category" },
+      { "id": "3", "name": "Légumes", "color": "#a5d6a7", "__typename": "Category" },
+      { "id": "4", "name": "Lapin / Volaille", "color": "#ef9a9a", "__typename": "Category" },
+      { "id": "5", "name": "Chocolat", "color": null, "__typename": "Category" },
+      { "id": "6", "name": "Sucre", "color": null, "__typename": "Category" },
+      { "id": "7", "name": "Féculents", "color": "#fff59d", "__typename": "Category" },
+      { "id": "8", "name": "Conserves", "color": "#80deea", "__typename": "Category" },
+      { "id": "9", "name": "Surgelés", "color": "#80deea", "__typename": "Category" },
+      { "id": "10", "name": "Plats préparés", "color": "#b39ddb", "__typename": "Category" },
+      { "id": "11", "name": "Riz", "color": "#fff59d", "__typename": "Category" },
+      { "id": "12", "name": "Blé", "color": "#80deea", "__typename": "Category" },
+      { "id": "13", "name": "Pâtes", "color": "#80deea", "__typename": "Category" },
+      { "id": "14", "name": "Viande", "color": "#ef9a9a", "__typename": "Category" },
+      { "id": "15", "name": "Condiment", "color": null, "__typename": "Category" },
+      { "id": "16", "name": "Apéritif", "color": null, "__typename": "Category" },
+      { "id": "17", "name": "Poisson", "color": "#90caf9", "__typename": "Category" },
+      { "id": "18", "name": "Laitages", "color": null, "__typename": "Category" },
+      { "id": "19", "name": "Asiatique", "color": null, "__typename": "Category" },
+      { "id": "20", "name": "Aide culinaire", "color": null, "__typename": "Category" },
+      { "id": "21", "name": "Charcuterie", "color": "#ef9a9a", "__typename": "Category" },
+      { "id": "22", "name": "Légumes secs", "color": "#a5d6a7", "__typename": "Category" },
+      { "id": "23", "name": "Soupe", "color": null, "__typename": "Category" },
+      { "id": "24", "name": "Fruits", "color": "#a5d6a7", "__typename": "Category" },
+      { "id": "25", "name": "Boissons", "color": null, "__typename": "Category" },
+      { "id": "26", "name": "Sauce", "color": null, "__typename": "Category" },
+      { "id": "27", "name": "Epicerie salée", "color": null, "__typename": "Category" },
+      { "id": "28", "name": "Dessert", "color": null, "__typename": "Category" },
+      { "id": "29", "name": "Vin", "color": null, "__typename": "Category" },
+      { "id": "30", "name": "Boeuf", "color": "#ef9a9a", "__typename": "Category" },
+      { "id": "31", "name": "Porc", "color": "#ef9a9a", "__typename": "Category" },
+      { "id": "32", "name": "Grilades", "color": null, "__typename": "Category" },
+      { "id": "33", "name": "Céréale", "color": "#fff59d", "__typename": "Category" },
+      { "id": "34", "name": "Epicerie sucrée", "color": null, "__typename": "Category" },
+      { "id": "35", "name": "Couscous", "color": "#fff59d", "__typename": "Category" }
+    ]
+  }
+}

@@ -39,7 +39,7 @@ export const ProductRow = ({
       }}
       onClick={() => navigate(`/product/${ean}`)}
     >
-      <Badge badgeContent={nbItems} color="primary" sx={{ '& span': { color: 'white' } }}>
+      <Badge badgeContent={nbItems} color="secondary" sx={{ '& span': { color: 'white' } }}>
         <Box
           sx={{
             background: `url(${imageSmallUrl || '/noimage.png'}) no-repeat  center `,

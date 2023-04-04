@@ -1,0 +1,31 @@
+{
+  "data": {
+    "findByProductAndUser": {
+      "contentUnit": { "name": "boîte(s)", "__typename": "ContentUnit" },
+      "categories": [
+        { "id": "1", "name": "Petit Dej", "__typename": "Category" },
+        { "id": "6", "name": "Sucre", "__typename": "Category" },
+        { "id": "24", "name": "Fruits", "__typename": "Category" }
+      ],
+      "location": { "id": "PHAUT", "name": "Placard haut", "__typename": "Location" },
+      "product": {
+        "ean": "3250390105220",
+        "name": "Confiture extra de fraises",
+        "brand": "Paquito,Intermarché",
+        "imageSmallUrl": "https://images.openfoodfacts.org/images/products/325/039/010/5220/front_fr.41.100.jpg",
+        "quantity": "370 g",
+        "articles": [
+          {
+            "id": "12",
+            "quantity": 2,
+            "expirationDate": null,
+            "location": { "id": "PHAUT", "name": "Placard haut", "__typename": "Location" },
+            "__typename": "Article"
+          }
+        ],
+        "__typename": "Product"
+      },
+      "__typename": "UserProductSettings"
+    }
+  }
+}

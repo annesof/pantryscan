@@ -1,0 +1,12 @@
+{
+  "data": {
+    "findOneProduct": {
+      "ean": "25",
+      "name": "notfound",
+      "brand": null,
+      "imageSmallUrl": null,
+      "quantity": null,
+      "__typename": "Product"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Block } from '@/components/Block';
 import { FullSizeDecenteredFlexBox } from '@/components/styled';
+import { Title } from '@/components/Title';
 import { ADD_PREFERENCES } from '@/data/mutations';
 import { GET_ALL_CATEGORIES, GET_PRODUCT_CODE, GET_PRODUCT_PREFERENCES_USER } from '@/data/queries';
 import { Article, Category, Product, UserProductPreferences } from '@/types';
@@ -19,15 +20,15 @@ function Welcome() {
 
   const { ean } = useParams();
 
-  useQuery(GET_ALL_CATEGORIES, {
-    onCompleted(data) {
-      setCategoryList(data?.findAllCategories);
-    },
-  });
-
   const [getProduct] = useLazyQuery(GET_PRODUCT_CODE, {
     onCompleted: (data) => {
       setProduct(data?.findOneProduct);
+      data?.findOneProduct?.name !== 'notfound' && getCategories();
+    },
+  });
+  const [getCategories] = useLazyQuery(GET_ALL_CATEGORIES, {
+    onCompleted: (data) => {
+      setCategoryList(data?.findAllCategories);
     },
   });
   const { error: errorPreferences } = useQuery(GET_PRODUCT_PREFERENCES_USER, {
@@ -59,12 +60,24 @@ function Welcome() {
     refetchQueries: [{ query: GET_PRODUCT_PREFERENCES_USER, variables: { idUser: 1, ean } }],
   });
 
+  const existingProduct = product && product.name !== 'notfound';
+
+  const notFound = (
+    <>
+      <Title id="product_notfound">Produit non trouvé</Title>
+      <Box>Veuillez scanner un autre code</Box>
+    </>
+  );
+
   return (
     <>
       <FullSizeDecenteredFlexBox>
         <Block>
-          {product && <ProductHeader product={product} categories={userProductPref?.categories} />}
-          {errorPreferences && product && (
+          {existingProduct && (
+            <ProductHeader product={product} categories={userProductPref?.categories} />
+          )}
+          {product && product.name === 'notfound' && notFound}
+          {errorPreferences && existingProduct && (
             <CreateProductPreferences
               ean={product?.ean}
               savePreferences={savePreferences}
@@ -80,9 +93,11 @@ function Welcome() {
           )}
         </Block>
       </FullSizeDecenteredFlexBox>
-      <Box sx={{ position: 'fixed', top: 40, right: 16 }}>
-        <ArticleAddModal userProductPref={userProductPref} />
-      </Box>
+      {existingProduct && !errorPreferences && (
+        <Box sx={{ position: 'fixed', top: 70, left: 16 }}>
+          <ArticleAddModal userProductPref={userProductPref} />
+        </Box>
+      )}
     </>
   );
 }

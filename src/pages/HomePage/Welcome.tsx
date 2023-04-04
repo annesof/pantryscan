@@ -1,5 +1,5 @@
 import { Block } from '@/components/Block';
-import { FullSizeCenteredFlexBox } from '@/components/styled';
+import { FullSizeDecenteredFlexBox } from '@/components/styled';
 import { Title } from '@/components/Title';
 
 import Logo from '../../sections/Logo.svg';
@@ -12,8 +12,8 @@ function Welcome() {
 
   return (
     <>
-      <FullSizeCenteredFlexBox flexDirection={'column'} sx={{ marginTop: -5 }}>
-        <img src={Logo} alt="icon" width="200px" />
+      <FullSizeDecenteredFlexBox flexDirection={'column'} sx={{ marginTop: -5 }}>
+        <img src={Logo} alt="logo" id="logo-pantryscan" width="200px" />
         <Block>
           <Title>Derniers ajouts</Title>
           <ProductListLast />
@@ -26,7 +26,7 @@ function Welcome() {
           <Title>Catégories favorites</Title>
           <PreferredCategories />
         </Block>
-      </FullSizeCenteredFlexBox>
+      </FullSizeDecenteredFlexBox>
     </>
   );
 }

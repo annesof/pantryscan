@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:18 as build
 WORKDIR /app
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 COPY --chown=node:node package.json pnpm-lock.yaml ./
@@ -13,8 +13,12 @@ FROM nginx:1.21-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/default.conf
 
+COPY certificate.crt /etc/ssl/certificate.crt
+
+COPY certificate.key /etc/ssl/certificate.key
+
 # Copier les fichiers générés de l'étape 1
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Exposer le port 80
 EXPOSE 80

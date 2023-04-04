@@ -81,6 +81,7 @@ export const DialogButton = ({ title, children, action, open, setOpen, id }: Dia
             sx={{ color: 'common.white' }}
             variant="contained"
             autoFocus
+            id={action.label}
             disabled={action.disabled}
             onClick={action.handleAction}
           >
