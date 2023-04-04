@@ -2,13 +2,11 @@ import { DialogButton } from '@/components/DialogButton';
 import { ADD_ARTICLES } from '@/data/mutations';
 import { GET_ALL_LOCATIONS, GET_PRODUCT_PREFERENCES_USER } from '@/data/queries';
 
+import { DatePicker } from '@/components/Datepicker/Datepicker';
 import { Location, UserProductPreferences } from '@/types';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { Autocomplete, Fab, Stack, TextField, TextFieldProps } from '@mui/material';
-import { DatePicker, frFR, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { fromUnixTime } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 
 interface Props {
@@ -37,7 +35,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
     userProductPref?.location || null,
   );
   const [quantity, setQuantity] = useState<string>('');
-  const [expDate, setExpDate] = useState<number | null>(null);
+  const [expDate, setExpDate] = useState<Date | null>(null);
 
   const [locationList, setLocationList] = useState<Location[]>([]);
 
@@ -71,7 +69,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
           idLocation: selectedLocation.id,
           eanProduct: userProductPref?.product.ean,
           idUser: 1,
-          ...(expDate && { expirationDate: fromUnixTime(expDate / 1000) }),
+          ...(expDate && { expirationDate: expDate }),
         },
       });
       setOpen(false);
@@ -131,28 +129,16 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             onChange={(e) => setQuantity(e.target.value)}
             InputProps={{ sx: { fontSize: '0.9rem' } }}
           />
-
-          <LocalizationProvider
-            dateAdapter={AdapterDateFns}
-            localeText={frFR.components.MuiLocalizationProvider.defaultProps.localeText}
-          >
-            <DatePicker
-              views={['month', 'year']}
-              format="MM/yyyy"
-              label="Date de péremption"
-              slots={{
-                textField: CalendarInput,
-              }}
-              slotProps={{
-                actionBar: { actions: ['accept', 'cancel', 'clear'] },
-              }}
-              value={expDate}
-              onChange={(newValue) => {
-                setExpDate(newValue);
-              }}
-              onError={() => console.log('pb')}
-            />
-          </LocalizationProvider>
+          <DatePicker
+            selected={expDate}
+            id="date"
+            label="Date de péremption"
+            onChange={(date) => setExpDate(date)}
+            dateFormat="MM/yyyy"
+            showMonthYearPicker
+            showYearDropdown
+            small={false}
+          />
         </Stack>
       </DialogButton>
     </>

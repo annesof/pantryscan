@@ -2,18 +2,6 @@
 
 **Pantry storage management**
 
-## Features
-
-- ✅ [Error Handling](#error-handling)
-- ✅ [Dev tools](#dev-tools)
-  - ✅ husky
-  - ✅ lint-staged
-  - ✅ https localhost
-
-#### Error Handling
-
-Nobody likes white screens and crashes without any notes. In [src/error-handling](./src/error-handling) you can find the error handling implementation. Here you can find `withErrorHandler` high order component. You can wrap any component by this HOC and it will catch all errors and show a default or your custom fallback. Currently, the main APP component is wrapped by `withErrorHandler` HOC.
-
 # Dev tools
 
 - [husky](https://typicode.github.io/husky/#/)

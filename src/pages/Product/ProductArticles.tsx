@@ -3,7 +3,7 @@ import { Title } from '@/components/Title';
 import { Article } from '@/types';
 import CreateIcon from '@mui/icons-material/Create';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Backdrop, Divider, Fade, IconButton, Menu, Typography } from '@mui/material';
+import { Backdrop, Box, Divider, Fade, IconButton, Menu, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { format, fromUnixTime } from 'date-fns';
 import { Fragment, MouseEvent, useState } from 'react';
@@ -24,7 +24,6 @@ const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
     <>
       <IconButton
         sx={{
-          //background: '#08B7C4',
           color: '#08B7C4',
           '&:hover': { color: 'white', background: '#08B7C4' },
         }}
@@ -41,7 +40,6 @@ const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
         anchorEl={anchorEl}
         id="account-menu"
         open={open}
-        //onClose={handleClose}
         onClick={handleClose}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
@@ -66,9 +64,9 @@ export const ProductArticles = ({
   return (
     <Block>
       {Object.keys(articles).map((key) => (
-        <Fragment key={key}>
+        <Box key={key}>
           <Title id={key}>{key}</Title>
-          <Grid container spacing={1}>
+          <Grid container spacing={1} sx={{ paddingBottom: '25px' }}>
             {articles[key].map(({ id, expirationDate, quantity }, index) => (
               <Fragment key={id}>
                 <Fade
@@ -108,7 +106,6 @@ export const ProductArticles = ({
                     <Grid xs={4} sx={{ textAlign: 'right' }}>
                       <IconButton
                         sx={{
-                          //background: '#08B7C4',
                           color: '#08B7C4',
                           '&:hover': { color: 'white', background: '#08B7C4' },
                         }}
@@ -133,7 +130,7 @@ export const ProductArticles = ({
               </Fragment>
             ))}
           </Grid>
-        </Fragment>
+        </Box>
       ))}
       {idSelected && <Backdrop sx={{ color: '#fff', zIndex: () => 900 }} open={true} />}
     </Block>

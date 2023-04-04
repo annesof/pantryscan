@@ -3,7 +3,7 @@
   font-size: 0.8rem;
   background-color: #fff;
   color: #000;
-  border: none;
+  border: 1px solid #62af4a;
   border-radius: 0.3rem;
   display: inline-block;
   position: relative;
@@ -52,4 +52,9 @@
 
 .react-datepicker__navigation:hover *::before {
   border-color: #fff;
+}
+
+.react-datepicker__triangle::before,
+.react-datepicker__triangle::after {
+  border-top-color: #62af4a;
 }

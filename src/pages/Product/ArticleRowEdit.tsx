@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/AddCircleRounded';
 import CheckIcon from '@mui/icons-material/CheckRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import MinusIcon from '@mui/icons-material/RemoveCircleRounded';
-import { IconButton, Stack, TextField, Typography } from '@mui/material';
+import { IconButton, Stack, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
 
@@ -18,6 +18,9 @@ import { DatePicker } from '@/components/Datepicker/Datepicker';
 const WhiteTextField = styled(TextField)({
   '& label.Mui-focused': {
     color: 'white',
+  },
+  '& label': {
+    color: 'rgba(255,255,255,0.8)',
   },
   '& .MuiInput-underline:after': {
     borderBottomColor: 'white',
@@ -78,57 +81,55 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
         }}
       >
         <Grid xs={4} sx={{ textAlign: 'right' }}>
-          <Stack direction="column" sx={{ textAlign: 'center', color: 'white' }}>
-            <Typography variant="caption">Quantité</Typography>
-            <Stack direction="row">
-              <IconButton
-                sx={{
-                  background: '#08B7C4',
-                  color: 'white',
-                  '&:hover': { background: '#08B7C4' },
-                  paddingTop: 0,
-                  verticalAlign: 'top',
-                }}
-                size="small"
-                id="substractOne"
-                onClick={() =>
-                  setQuantityLocal((qty) => {
-                    if (!qty || qty === 0) return 0;
-                    return qty - 1;
-                  })
-                }
-              >
-                <MinusIcon fontSize="inherit" />
-              </IconButton>
-              <WhiteTextField
-                value={quantityLocal}
-                color="secondary"
-                sx={{ width: '25px' }}
-                InputProps={{ sx: { fontSize: '0.9rem', height: '1em', color: 'white' } }}
-                size="small"
-                id="quantity_editable"
-                variant="standard"
-                inputProps={{ min: 0, inputMode: 'numeric', pattern: '[0-9]*' }}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  setQuantityLocal(event.target.value === '' ? 0 : Number(event.target.value));
-                }}
-              />
+          <Stack direction="row">
+            <IconButton
+              sx={{
+                background: '#08B7C4',
+                color: 'white',
+                '&:hover': { background: '#08B7C4' },
+                paddingTop: 0,
+                verticalAlign: 'top',
+              }}
+              size="small"
+              id="substractOne"
+              onClick={() =>
+                setQuantityLocal((qty) => {
+                  if (!qty || qty === 0) return 0;
+                  return qty - 1;
+                })
+              }
+            >
+              <MinusIcon fontSize="inherit" />
+            </IconButton>
+            <WhiteTextField
+              value={quantityLocal}
+              color="secondary"
+              sx={{ width: '25px' }}
+              label="Qté"
+              InputProps={{ sx: { fontSize: '0.9rem', height: '1.3em', color: 'white' } }}
+              size="small"
+              id="quantity_editable"
+              variant="standard"
+              inputProps={{ min: 0, inputMode: 'numeric', pattern: '[0-9]*' }}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                setQuantityLocal(event.target.value === '' ? 0 : Number(event.target.value));
+              }}
+            />
 
-              <IconButton
-                sx={{
-                  background: '#08B7C4',
-                  color: 'white',
-                  '&:hover': { background: '#08B7C4' },
-                  paddingTop: 0,
-                  verticalAlign: 'top',
-                }}
-                size="small"
-                id="addOne"
-                onClick={() => setQuantityLocal((qty) => qty + 1)}
-              >
-                <AddIcon fontSize="inherit" />
-              </IconButton>
-            </Stack>
+            <IconButton
+              sx={{
+                background: '#08B7C4',
+                color: 'white',
+                '&:hover': { background: '#08B7C4' },
+                paddingTop: 0,
+                verticalAlign: 'top',
+              }}
+              size="small"
+              id="addOne"
+              onClick={() => setQuantityLocal((qty) => qty + 1)}
+            >
+              <AddIcon fontSize="inherit" />
+            </IconButton>
           </Stack>
         </Grid>
         <Grid xs={4} sx={{ textAlign: 'right' }}>
@@ -140,6 +141,7 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
             dateFormat="MM/yyyy"
             showMonthYearPicker
             showYearDropdown
+            small
           />
         </Grid>
         <Grid xs={4} sx={{ textAlign: 'right' }}>

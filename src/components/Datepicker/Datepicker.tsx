@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { Stack, TextField, Typography } from '@mui/material';
+import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import { forwardRef } from 'react';
@@ -12,6 +12,9 @@ import './custom-datepicker.css';
 registerLocale('fr', fr);
 
 const WhiteTextField = styled(TextField)({
+  '& label': {
+    color: 'rgba(255,255,255,0.8)',
+  },
   '& label.Mui-focused': {
     color: 'white',
   },
@@ -26,7 +29,7 @@ const WhiteTextField = styled(TextField)({
   },
 });
 
-const CalendarInput = forwardRef<HTMLInputElement, any>((props, ref) => (
+const WhiteCalendarInput = forwardRef<HTMLInputElement, any>((props, ref) => (
   <WhiteTextField
     {...props}
     size="small"
@@ -36,12 +39,11 @@ const CalendarInput = forwardRef<HTMLInputElement, any>((props, ref) => (
     InputLabelProps={{
       shrink: true,
     }}
-    //id="expirationDate"
     color="secondary"
     InputProps={{
       sx: {
         fontSize: '0.9rem',
-        height: '1em',
+        height: '1.3em',
         color: 'white',
         '& button>svg': { color: 'white', marginBottom: '10px', fontSize: '18px' },
       },
@@ -49,17 +51,33 @@ const CalendarInput = forwardRef<HTMLInputElement, any>((props, ref) => (
   />
 ));
 
+const CalendarInput = forwardRef<HTMLInputElement, any>((props, ref) => (
+  <TextField
+    {...props}
+    size="small"
+    variant="standard"
+    margin="none"
+    ref={ref}
+    InputLabelProps={{
+      shrink: true,
+    }}
+  />
+));
+
 interface DatepickerProps extends ReactDatePickerProps {
   label: string;
   id: string;
+  small: boolean;
 }
 
 export const DatePicker = (props: DatepickerProps) => {
-  const { label, id, ...others } = props;
+  const { label, id, small, ...others } = props;
   return (
-    <Stack direction="column" sx={{ textAlign: 'left', color: 'white' }}>
-      <Typography variant="caption">{label}</Typography>
-      <BaseDatePicker {...others} id={id} customInput={<CalendarInput />} locale="fr" />
-    </Stack>
+    <BaseDatePicker
+      {...others}
+      id={id}
+      customInput={small ? <WhiteCalendarInput label={label} /> : <CalendarInput label={label} />}
+      locale="fr"
+    />
   );
 };

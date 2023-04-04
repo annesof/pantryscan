@@ -23,7 +23,7 @@ describe('Articles management', () => {
 
     cy.get('input#quantity').type('1');
 
-    cy.get('input#date').type('122024');
+    cy.get('input#date').type('12/2024');
 
     cy.get('button#ok').should('be.visible').should('not.be.disabled').click();
     cy.interceptGql('getByProductAndUser', 'getByProductAndUser/4006985902304_with_one_article');
@@ -49,7 +49,7 @@ describe('Articles management', () => {
 
     cy.get('input#quantity').type('1');
 
-    cy.get('input#date').type('122025');
+    cy.get('input#date').type('12/2025');
 
     cy.get('button#ok').should('be.visible').should('not.be.disabled').click();
     cy.interceptGql('getByProductAndUser', 'getByProductAndUser/4006985902304_with_two_article');
@@ -79,14 +79,5 @@ describe('Articles management', () => {
     cy.get('input#expirationDate').should('be.visible').should('have.value', '12/2024');
     cy.get('input#expirationDate').clear().type('11/2025');
     cy.contains('nov.').click();
-
-    //cy.get('input#expirationDate').click();
-
-    /*cy.get('button#ok').should('be.visible').should('not.be.disabled').click();
-    cy.interceptGql('getByProductAndUser', 'getByProductAndUser/4006985902304_with_two_article');
-    cy.contains('Placard haut').should('be.visible');
-    cy.contains('Cellier').should('be.visible');
-    cy.get('button#edit-16').should('be.visible').should('not.be.disabled');
-    cy.get('button#edit-17').should('be.visible').should('not.be.disabled');*/
   });
 });
