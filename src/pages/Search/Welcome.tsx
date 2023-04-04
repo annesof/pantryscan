@@ -74,7 +74,6 @@ function TabContent({ locationId, categories }: { locationId?: string; categorie
     }
   }, [loading, error, data]);
 
-  if (loading) return <span>Chargement...</span>;
   if (error) return <span>Error!</span>;
 
   return (
@@ -89,9 +88,11 @@ function TabContent({ locationId, categories }: { locationId?: string; categorie
         paddingTop: '15px',
       }}
     >
-      {content?.map((product: Product) => (
-        <ProductRow key={product.ean} product={product} locationId={locationId} />
-      ))}
+      {loading && <span>Chargement...</span>}
+      {!loading &&
+        content?.map((product: Product) => (
+          <ProductRow key={product.ean} product={product} locationId={locationId} />
+        ))}
     </Box>
   );
 }
