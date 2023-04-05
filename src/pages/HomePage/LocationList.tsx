@@ -5,7 +5,6 @@ import { Box, Unstable_Grid2 as Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export const LocationList = () => {
-  //const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_ALL_LOCATIONS);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;

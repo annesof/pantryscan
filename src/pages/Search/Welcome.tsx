@@ -81,7 +81,6 @@ function TabContent({ locationId, categories }: { locationId?: string; categorie
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        //justifyContent: 'space-around',
         height: '500px',
         overflowY: 'auto',
         overflowX: 'hidden',
@@ -112,12 +111,12 @@ function Welcome() {
     [locations?.findAllLocations],
   );
 
-  const handleTabChange = (event: SyntheticEvent, newValue: number) => {
+  const onTabChange = (event: SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
     setSearchParams({ ...Object.fromEntries(searchParams), loc: locationList[newValue].id });
   };
 
-  const handleChangeIndex = (index: number) => {
+  const onChangeIndex = (index: number) => {
     setSelectedTab(index);
   };
 
@@ -132,7 +131,7 @@ function Welcome() {
     if (locationInUrl) {
       const locationIndex = locationList.findIndex((c) => locationInUrl === c.id);
       setSelectedLocation(locationInUrl);
-      handleChangeIndex(locationIndex);
+      onChangeIndex(locationIndex);
     }
     const categoriesInUrl = searchParams?.get('categ');
 
@@ -190,7 +189,7 @@ function Welcome() {
               scrollButtons="auto"
               allowScrollButtonsMobile
               aria-label="full width tabs example"
-              onChange={handleTabChange}
+              onChange={onTabChange}
             >
               {locationList.map((item, index) => (
                 <Tab
@@ -201,7 +200,7 @@ function Welcome() {
                 />
               ))}
             </Tabs>
-            <SwipeableViews axis={'x'} index={selectedTab} onChangeIndex={handleChangeIndex}>
+            <SwipeableViews axis={'x'} index={selectedTab} onChangeIndex={onChangeIndex}>
               {locationList.map((location, index) => (
                 <TabPanel index={index} key={location.id} value={selectedTab}>
                   <TabContent locationId={selectedLocation} categories={selectedCategories} />

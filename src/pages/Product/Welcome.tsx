@@ -94,7 +94,7 @@ function Welcome() {
         </Block>
       </FullSizeDecenteredFlexBox>
       {existingProduct && !errorPreferences && (
-        <Box sx={{ position: 'fixed', top: 70, left: 16 }}>
+        <Box sx={{ position: 'fixed', top: 30, right: 5 }}>
           <ArticleAddModal userProductPref={userProductPref} />
         </Box>
       )}

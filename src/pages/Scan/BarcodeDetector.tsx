@@ -17,12 +17,15 @@ export const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: Barcod
       const video = videoRef.current ?? false;
       const canvas = canvasRef.current ?? false;
       if (video && canvas) {
+        // create a  drawing context
         const ctx = canvas.getContext('2d');
         const constraints = {
           video: { facingMode: 'environment' },
         };
         try {
+          // open stream video
           const stream = await navigator.mediaDevices.getUserMedia(constraints);
+          //Associate the video stream with the <video> element and starts to play
           video.srcObject = stream;
           video.setAttribute('playsinline', true.toString());
           video.play();
@@ -31,10 +34,12 @@ export const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: Barcod
           return;
         }
 
+        //Initializes a barcode detector
         const detector = new (window as any).BarcodeDetector({
           formats: ['ean_13'],
         });
 
+        //Defines a recursive function to detect barcodes
         const detect = async () => {
           ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
           if (video?.readyState === video?.HAVE_ENOUGH_DATA) {

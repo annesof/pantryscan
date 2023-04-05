@@ -21,7 +21,6 @@ const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
 export function BottomMenu() {
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
-  //const match = useLocation();
   return (
     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
       <BottomNavigation

@@ -39,8 +39,6 @@ const sharedTheme = {
           marginRight: 10,
           marginLeft: 10,
         },
-        // TODO: open issue for missing "horizontal" CSS rule
-        // in Divider API - https://mui.com/material-ui/api/divider/#css
         middle: {
           marginTop: 10,
           marginBottom: 10,
@@ -50,7 +48,6 @@ const sharedTheme = {
     },
   },
 } as ThemeOptions; // the reason for this casting is deepmerge return type
-// TODO (Suren): replace mui-utils-deepmerge with lodash or ramda deepmerge
 
 const themes: Record<Themes, ThemeOptions> = {
   light: deepmerge(sharedTheme, {

@@ -6,12 +6,12 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 import { useCallback } from 'react';
 interface ArticleDeleteModalProps {
-  handleClose: () => void;
+  onClose: () => void;
   ean: string;
   id: number;
 }
 
-export const ArticleDeleteModal = ({ handleClose, ean, id }: ArticleDeleteModalProps) => {
+export const ArticleDeleteModal = ({ onClose, ean, id }: ArticleDeleteModalProps) => {
   const [deleteArticle] = useMutation(DELETE_ARTICLE, {
     refetchQueries: [
       {
@@ -32,7 +32,7 @@ export const ArticleDeleteModal = ({ handleClose, ean, id }: ArticleDeleteModalP
   return (
     <DialogMenu
       title="Suppression"
-      onCloseMenu={handleClose}
+      onCloseMenu={onClose}
       action={{
         name: 'Suppression',
         Icon: ClearIcon,

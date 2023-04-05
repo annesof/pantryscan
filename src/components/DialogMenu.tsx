@@ -67,11 +67,11 @@ function StyledDialogTitle(props: DialogTitleProps) {
 
 export const DialogMenu = ({ title, children, action }: DialogProps) => {
   const [open, setOpen] = useState(false);
-  const handleClickOpen = (event: MouseEvent<HTMLLIElement>) => {
+  const onClickOpen = (event: MouseEvent<HTMLLIElement>) => {
     event.stopPropagation();
     setOpen(true);
   };
-  const handleClose = (event: any, reason: string) => {
+  const onClose = (event: any, reason: string) => {
     event.stopPropagation();
     if (reason !== 'backdropClick') {
       setOpen(false);
@@ -86,7 +86,7 @@ export const DialogMenu = ({ title, children, action }: DialogProps) => {
 
   return (
     <>
-      <MenuItem onClick={handleClickOpen}>
+      <MenuItem onClick={onClickOpen}>
         <ListItemIcon>
           <action.Icon fontSize="small" />
         </ListItemIcon>
@@ -95,7 +95,7 @@ export const DialogMenu = ({ title, children, action }: DialogProps) => {
       <StyledDialog
         fullWidth
         maxWidth={'md'}
-        onClose={handleClose}
+        onClose={onClose}
         aria-labelledby="dialog-title"
         open={open}
       >

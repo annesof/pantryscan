@@ -6,28 +6,12 @@ import { DatePicker } from '@/components/Datepicker/Datepicker';
 import { Location, UserProductPreferences } from '@/types';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import { Autocomplete, Fab, Stack, TextField, TextFieldProps } from '@mui/material';
+import { Autocomplete, Fab, Stack, TextField } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 
 interface Props {
   userProductPref?: UserProductPreferences;
 }
-
-const CalendarInput = function BrowserInput(props: TextFieldProps) {
-  return (
-    <TextField
-      {...props}
-      size="small"
-      variant="standard"
-      margin="none"
-      id="date"
-      InputLabelProps={{
-        shrink: true,
-      }}
-      InputProps={{ sx: { fontSize: '0.9rem' } }}
-    />
-  );
-};
 
 export const ArticleAddModal = ({ userProductPref }: Props) => {
   const [open, setOpen] = useState(false);
@@ -61,6 +45,12 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
     }
   }, [userProductPref, open, getAllLocation]);
 
+  const onClose = useCallback(() => {
+    setQuantity('');
+    setExpDate(null);
+    setOpen(false);
+  }, []);
+
   const onSubmit = useCallback(() => {
     if (selectedLocation && quantity) {
       saveArticles({
@@ -72,14 +62,14 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
           ...(expDate && { expirationDate: expDate }),
         },
       });
-      setOpen(false);
+      onClose();
     }
-  }, [quantity, selectedLocation, expDate, saveArticles, userProductPref?.product.ean]);
+  }, [quantity, selectedLocation, expDate, saveArticles, userProductPref?.product.ean, onClose]);
 
   return (
     <>
       <Fab
-        sx={{ color: 'common.white' }}
+        sx={{ color: 'common.white', fontSize: '12px' }}
         size="small"
         aria-label="scan"
         variant="extended"
@@ -87,14 +77,14 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
         onClick={() => setOpen(true)}
         id="add_location"
       >
-        <AddCircleRoundedIcon fontSize="small" sx={{ mr: 1 }} />
+        <AddCircleRoundedIcon fontSize="small" sx={{ mr: 1, fontSize: '16px' }} />
         emplacement
       </Fab>
       <DialogButton
         id="article_add"
         title="Ajout d'un article"
         open={open}
-        setOpen={setOpen}
+        onClose={onClose}
         action={{
           name: 'test',
           label: 'ok',

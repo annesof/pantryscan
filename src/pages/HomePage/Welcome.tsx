@@ -5,18 +5,16 @@ import { Title } from '@/components/Title';
 import Logo from '../../sections/Logo.svg';
 import { LocationList } from './LocationList';
 import { PreferredCategories } from './PreferredCategories';
-import { ProductListLast } from './ProductListLast';
+import { ProductLastList } from './ProductLastList';
 
 function Welcome() {
-  //const isPortrait = useOrientation();
-
   return (
     <>
-      <FullSizeDecenteredFlexBox flexDirection={'column'} sx={{ marginTop: -5 }}>
+      <FullSizeDecenteredFlexBox flexDirection="column" sx={{ marginTop: -5 }}>
         <img src={Logo} alt="logo" id="logo-pantryscan" width="200px" />
         <Block>
           <Title>Derniers ajouts</Title>
-          <ProductListLast />
+          <ProductLastList />
         </Block>
         <Block>
           <Title>Mes emplacements</Title>

@@ -36,7 +36,7 @@ function SW() {
       });
     } else if (needRefresh) {
       notificationKey.current = notificationsActions.push({
-        message: 'Nouveau contenu disponible, click on reload button to update.',
+        message: 'Nouveau contenu disponible.',
         options: {
           variant: 'warning',
           persist: true,

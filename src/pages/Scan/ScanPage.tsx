@@ -17,7 +17,7 @@ function ScanPage() {
   const [manual, setManual] = useState<boolean>(false);
   const [videoError, setVideoError] = useState<boolean>(false);
   const navigate = useNavigate();
-  const [getProduct, { loading, error }] = useLazyQuery(GET_PRODUCT_CODE, {
+  const [getProduct, { error }] = useLazyQuery(GET_PRODUCT_CODE, {
     onCompleted: (data) => {
       onInfoFetched(data);
     },
@@ -57,30 +57,19 @@ function ScanPage() {
   return (
     <FullSizeCenteredFlexBox flexDirection={isPortrait ? 'column' : 'row'}>
       <Block sx={{ marginTop: '30px' }}>
-        <Title>Scan de l&apos;article</Title> {loading && <p>Loading ...</p>}
-        <Fab
-          sx={{ color: 'common.white', position: 'fixed', right: 5, top: 30 }}
-          aria-label="scan"
-          size="small"
-          color="primary"
-          variant="extended"
-          onClick={() => setManual(true)}
-        >
-          Manuel
-          <QrCodeScannerIcon fontSize="small" />
-        </Fab>
+        <Title>Scan de l&apos;article</Title>
         {!videoError && !manual && (
           <>
             <BarcodeDetector onDetect={setBarcode} onError={setVideoError} />
             <Fab
-              sx={{ color: 'common.white', position: 'fikxed', right: 5, top: 50 }}
+              sx={{ color: 'common.white', position: 'fixed', right: 5, top: 30 }}
               aria-label="scan"
-              size="medium"
+              size="small"
               color="primary"
               variant="extended"
               onClick={() => setManual(true)}
             >
-              <QrCodeScannerIcon fontSize="large" />
+              Manuel <QrCodeScannerIcon fontSize="large" />
             </Fab>
           </>
         )}

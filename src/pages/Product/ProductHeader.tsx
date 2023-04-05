@@ -1,7 +1,23 @@
 import { Chip } from '@/components/Chip';
 import { Category, Product } from '@/types';
 import { Badge, Box, Stack, Typography, useMediaQuery } from '@mui/material';
+import { styled } from '@mui/system';
 import { useMemo } from 'react';
+
+const EmphasizeBox = styled(Box)({
+  borderRadius: '50%',
+  background: 'white',
+  width: '120px',
+  height: '120px',
+  textAlign: 'center',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'relative',
+  top: '-80px',
+  transform: 'translateX(-50%)',
+  left: '50%',
+});
 
 export const ProductHeader = ({
   product,
@@ -21,22 +37,7 @@ export const ProductHeader = ({
 
   return (
     <>
-      <Box
-        sx={{
-          borderRadius: '50%',
-          background: 'white',
-          width: '120px',
-          height: '120px',
-          textAlign: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'relative',
-          top: '-80px',
-          transform: 'translateX(-50%)',
-          left: '50%',
-        }}
-      >
+      <EmphasizeBox>
         <Badge
           badgeContent={nbElements}
           color="secondary"
@@ -49,10 +50,11 @@ export const ProductHeader = ({
           <img
             src={product?.imageSmallUrl}
             width="70px"
+            id="product_image"
             style={{ borderRadius: '10px', maxHeight: '85px' }}
           />
         </Badge>
-      </Box>
+      </EmphasizeBox>
 
       <Box
         sx={{
@@ -82,7 +84,7 @@ export const ProductHeader = ({
             </Typography>
           </Box>
 
-          <Box sx={{ color: '#F34242', textAlign: 'center' }}>
+          <Box sx={{ textAlign: 'center' }}>
             {categories.map((option) => (
               <Chip color={option.color} size="small" label={option.name} key={option.id} />
             ))}

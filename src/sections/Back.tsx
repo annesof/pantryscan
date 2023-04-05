@@ -5,12 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export const Back = () => {
   const navigate = useNavigate();
   return (
-    <IconButton
-      aria-label="fingerprint"
-      sx={{ color: 'white' }}
-      size="large"
-      onClick={() => navigate(-1)}
-    >
+    <IconButton aria-label="back" sx={{ color: 'white' }} size="large" onClick={() => navigate(-1)}>
       <ChevronLeftRoundedIcon fontSize="large" />
     </IconButton>
   );

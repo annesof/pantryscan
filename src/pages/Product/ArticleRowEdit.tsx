@@ -41,6 +41,13 @@ interface Props {
   setIdSelected: any;
   hidden: boolean;
 }
+
+const buttonStyle = {
+  background: '#08B7C4',
+  color: 'white',
+  '&:hover': { background: '#08B7C4' },
+  paddingTop: '15px',
+};
 export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
   ({ id, ean, quantity, expirationDate, setIdSelected, hidden }: Props, ref) => {
     const [quantityLocal, setQuantityLocal] = useState<number>(quantity || 0);
@@ -87,8 +94,7 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
                 background: '#08B7C4',
                 color: 'white',
                 '&:hover': { background: '#08B7C4' },
-                paddingTop: 0,
-                verticalAlign: 'top',
+                paddingTop: '15px',
               }}
               size="small"
               id="substractOne"
@@ -121,8 +127,7 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
                 background: '#08B7C4',
                 color: 'white',
                 '&:hover': { background: '#08B7C4' },
-                paddingTop: 0,
-                verticalAlign: 'top',
+                paddingTop: '15px',
               }}
               size="small"
               id="addOne"
@@ -145,26 +150,10 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
           />
         </Grid>
         <Grid xs={4} sx={{ textAlign: 'right' }}>
-          <IconButton
-            sx={{
-              background: '#08B7C4',
-              color: 'white',
-              '&:hover': { background: '#08B7C4' },
-            }}
-            size="small"
-            onClick={onSubmit}
-          >
+          <IconButton sx={{ ...buttonStyle }} size="small" onClick={onSubmit}>
             <CheckIcon fontSize="inherit" />
           </IconButton>
-          <IconButton
-            sx={{
-              background: '#08B7C4',
-              color: 'white',
-              '&:hover': { background: '#08B7C4' },
-            }}
-            size="small"
-            onClick={() => setIdSelected(undefined)}
-          >
+          <IconButton sx={{ ...buttonStyle }} size="small" onClick={() => setIdSelected(undefined)}>
             <ClearRoundedIcon fontSize="inherit" />
           </IconButton>
         </Grid>

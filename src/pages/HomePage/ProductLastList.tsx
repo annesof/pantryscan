@@ -4,7 +4,7 @@ import { Product } from '@/types';
 import { useQuery } from '@apollo/client';
 import { Box } from '@mui/material';
 
-export const ProductListLast = () => {
+export const ProductLastList = () => {
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
     variables: {
       fetchProductsArgs: {
