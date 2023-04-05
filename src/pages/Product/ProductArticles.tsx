@@ -14,10 +14,10 @@ import { ArticleSwitchModal } from './ArticleSwitchModal';
 const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
+  const onClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const onClose = () => {
     setAnchorEl(null);
   };
   return (
@@ -32,7 +32,7 @@ const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
         aria-controls={open ? 'account-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
+        onClick={onClick}
       >
         <MoreVertIcon fontSize="inherit" />
       </IconButton>
@@ -40,12 +40,12 @@ const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
         anchorEl={anchorEl}
         id="account-menu"
         open={open}
-        onClick={handleClose}
+        onClick={onClose}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
       >
-        <ArticleSwitchModal handleClose={handleClose} id={id} ean={ean} />
-        <ArticleDeleteModal handleClose={handleClose} id={id} ean={ean} />
+        <ArticleSwitchModal onClose={onClose} id={id} ean={ean} />
+        <ArticleDeleteModal onClose={onClose} id={id} ean={ean} />
       </Menu>
     </>
   );

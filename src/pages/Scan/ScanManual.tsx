@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const ScanManual = ({ error }: { error: boolean }) => {
-  //const [barcode, setBarcode] = useState<string>();
   const [barcodeInput, setBarcodeInput] = useState<string>();
   const navigate = useNavigate();
 

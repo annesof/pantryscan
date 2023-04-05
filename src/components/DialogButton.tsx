@@ -39,7 +39,7 @@ interface DialogProps {
     label: string;
     disabled: boolean;
   };
-  setOpen: (value: boolean) => void;
+  onClose: () => void;
 }
 
 function StyledDialogTitle(props: DialogTitleProps) {
@@ -66,11 +66,11 @@ function StyledDialogTitle(props: DialogTitleProps) {
   );
 }
 
-export const DialogButton = ({ title, children, action, open, setOpen, id }: DialogProps) => {
+export const DialogButton = ({ title, children, action, open, onClose, id }: DialogProps) => {
   return (
     <>
       <StyledDialog fullWidth={true} maxWidth={'md'} open={open}>
-        <StyledDialogTitle id={id} onClose={() => setOpen(false)}>
+        <StyledDialogTitle id={id} onClose={onClose}>
           {title}
         </StyledDialogTitle>
         <DialogContent sx={{ padding: 10 }} onClick={(e) => e.stopPropagation()}>
@@ -87,7 +87,7 @@ export const DialogButton = ({ title, children, action, open, setOpen, id }: Dia
           >
             {action.label}
           </Button>
-          <Button variant="outlined" onClick={() => setOpen(false)}>
+          <Button variant="outlined" onClick={onClose}>
             Annuler
           </Button>
         </DialogActions>

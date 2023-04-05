@@ -9,12 +9,12 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import { Autocomplete, Stack, TextField } from '@mui/material';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 interface ArticleSwitchModalProps {
-  handleClose: () => void;
+  onClose: () => void;
   ean: string;
   id: number;
 }
 
-export const ArticleSwitchModal = ({ handleClose, ean, id }: ArticleSwitchModalProps) => {
+export const ArticleSwitchModal = ({ onClose, ean, id }: ArticleSwitchModalProps) => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>();
   const [quantity, setQuantity] = useState<number>();
   const [errorForm, setErrorForm] = useState(true);
@@ -53,7 +53,7 @@ export const ArticleSwitchModal = ({ handleClose, ean, id }: ArticleSwitchModalP
   return (
     <DialogMenu
       title="Changement d'emplacement"
-      onCloseMenu={handleClose}
+      onCloseMenu={onClose}
       action={{
         name: 'Transfert',
         Icon: CompareArrowsIcon,
