@@ -58,11 +58,22 @@ function ScanPage() {
     <FullSizeCenteredFlexBox flexDirection={isPortrait ? 'column' : 'row'}>
       <Block sx={{ marginTop: '30px' }}>
         <Title>Scan de l&apos;article</Title> {loading && <p>Loading ...</p>}
+        <Fab
+          sx={{ color: 'common.white', position: 'fixed', right: 5, top: 30 }}
+          aria-label="scan"
+          size="small"
+          color="primary"
+          variant="extended"
+          onClick={() => setManual(true)}
+        >
+          Manuel
+          <QrCodeScannerIcon fontSize="small" />
+        </Fab>
         {!videoError && !manual && (
           <>
-            <BarcodeDetector onDetect={setBarcode} onError={setVideoError} />{' '}
+            <BarcodeDetector onDetect={setBarcode} onError={setVideoError} />
             <Fab
-              sx={{ color: 'common.white', position: 'absolute', right: 5, bottom: -50 }}
+              sx={{ color: 'common.white', position: 'fikxed', right: 5, top: 50 }}
               aria-label="scan"
               size="medium"
               color="primary"
