@@ -12,8 +12,8 @@ describe('scan redirects', () => {
     cy.url().should('be.equals', 'http://localhost:5173/product/4006985902304');
     cy.get('h6').contains("L'Original - Cacao en poudre non sucré").should('be.visible');
     cy.get('input#categories').should('be.visible');
-    cy.get('input#location').should('be.visible');
-    cy.get('input#unit').should('be.visible');
+    cy.get('#location').should('be.visible');
+    cy.get('#unit').should('be.visible');
   });
   it('product not found', () => {
     cy.interceptGql('getByProductAndUser', 'getByProductAndUser/25');

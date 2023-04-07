@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export const LocationList = () => {
   const { loading, error, data } = useQuery(GET_ALL_LOCATIONS);
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Chargement...</p>;
   if (error) return <p>Error : {error.message}</p>;
   return (
     <Grid container spacing={2}>
@@ -16,7 +16,7 @@ export const LocationList = () => {
             <Box
               sx={{
                 borderRadius: '5px',
-                background: '#08B7C4',
+                background: (theme) => theme.palette.secondary.main,
                 padding: 1,
                 color: 'white',
                 margin: '5px',

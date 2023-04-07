@@ -15,15 +15,13 @@ describe('Articles management', () => {
 
     cy.get('button#ok').should('be.visible').should('be.disabled');
 
-    cy.get('input#location').click();
-    cy.contains('Placard haut')
-      .should('be.visible')
-      .and('have.class', 'MuiAutocomplete-option')
-      .click();
+    cy.get('#location').click();
+    cy.contains('Placard haut').should('be.visible').and('have.class', 'MuiMenuItem-root').click();
 
     cy.get('input#quantity').type('1');
 
-    cy.get('input#date').type('12/2024');
+    cy.get('input#date').click();
+    cy.get('.react-datepicker__month-11').click();
 
     cy.get('button#ok').should('be.visible').should('not.be.disabled').click();
     cy.interceptGql('getByProductAndUser', 'getByProductAndUser/4006985902304_with_one_article');
@@ -44,12 +42,13 @@ describe('Articles management', () => {
 
     cy.get('button#ok').should('be.visible').should('be.disabled');
 
-    cy.get('input#location').click();
-    cy.contains('Cellier').should('be.visible').and('have.class', 'MuiAutocomplete-option').click();
+    cy.get('#location').click();
+    cy.get('#CEL').click();
 
     cy.get('input#quantity').type('1');
 
-    cy.get('input#date').type('12/2025');
+    cy.get('input#date').click();
+    cy.get('.react-datepicker__month-11').click();
 
     cy.get('button#ok').should('be.visible').should('not.be.disabled').click();
     cy.interceptGql('getByProductAndUser', 'getByProductAndUser/4006985902304_with_two_article');
@@ -77,7 +76,9 @@ describe('Articles management', () => {
     cy.get('input#quantity_editable').should('have.value', 2);
 
     cy.get('input#expirationDate').should('be.visible').should('have.value', '12/2024');
-    cy.get('input#expirationDate').clear().type('11/2025');
-    cy.contains('nov.').click();
+    cy.get('[data-testid="ClearIcon"]').click();
+    cy.get('input#expirationDate').click();
+    cy.get('.react-datepicker__month-10').click();
+    cy.get('input#expirationDate').should('be.visible').should('have.value', '11/2023');
   });
 });

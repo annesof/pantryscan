@@ -167,7 +167,6 @@ function Welcome() {
               id="categories"
               value={selectedCategories}
               options={categoryList}
-              disableCloseOnSelect
               renderTags={(value, getTagProps) =>
                 value.map((option, index: number) => (
                   <Chip

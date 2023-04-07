@@ -49,9 +49,8 @@ export const ProductHeader = ({
         >
           <img
             src={product?.imageSmallUrl}
-            width="70px"
             id="product_image"
-            style={{ borderRadius: '10px', maxHeight: '85px' }}
+            style={{ borderRadius: '10px', maxHeight: '85px', width: '95%', maxWidth: '85px' }}
           />
         </Badge>
       </EmphasizeBox>

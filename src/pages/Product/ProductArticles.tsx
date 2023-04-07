@@ -24,8 +24,8 @@ const MoreAction = ({ id, ean }: { id: number; ean: string }) => {
     <>
       <IconButton
         sx={{
-          color: '#08B7C4',
-          '&:hover': { color: 'white', background: '#08B7C4' },
+          color: (theme) => theme.palette.secondary.main,
+          '&:hover': { color: 'white', background: (theme) => theme.palette.secondary.main },
         }}
         aria-label="more"
         size="small"
@@ -95,7 +95,7 @@ export const ProductArticles = ({
                     <Grid xs={2}>
                       <Typography variant="caption"> {content}</Typography>
                     </Grid>
-                    <Grid xs={4} sx={{ textAlign: 'right' }}>
+                    <Grid xs={5} sx={{ textAlign: 'right' }}>
                       <Typography variant="caption">
                         {expirationDate &&
                           `exp. 
@@ -103,11 +103,14 @@ export const ProductArticles = ({
                       </Typography>
                     </Grid>
                     <Grid xs={1} />
-                    <Grid xs={4} sx={{ textAlign: 'right' }}>
+                    <Grid xs={3} sx={{ textAlign: 'right' }}>
                       <IconButton
                         sx={{
-                          color: '#08B7C4',
-                          '&:hover': { color: 'white', background: '#08B7C4' },
+                          color: (theme) => theme.palette.secondary.main,
+                          '&:hover': {
+                            color: 'white',
+                            background: (theme) => theme.palette.secondary.main,
+                          },
                         }}
                         id={`edit-${id}`}
                         aria-label="edit"

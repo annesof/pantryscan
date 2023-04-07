@@ -14,23 +14,21 @@ describe('add  preferences product', () => {
     cy.get('h6').contains("L'Original - Cacao en poudre non sucré").should('be.visible');
 
     cy.get('input#categories').should('be.visible');
-    cy.get('input#location').should('be.visible');
-    cy.get('input#unit').should('be.visible');
+    cy.get('#location').should('be.visible');
+    cy.get('#unit').should('be.visible');
     cy.get('button#next').should('be.visible').should('be.disabled');
 
     cy.get('input#categories').type('Petit Dej').should('have.value', 'Petit Dej');
     cy.get('#categories-option-0').click();
+    cy.get('input#categories').click();
     cy.get('#categories-option-3').click();
 
-    cy.get('.MuiButtonBase-root:nth-child(2) > [data-testid="ArrowDropDownIcon"] > path').click();
-    cy.get('input#location').click();
-    cy.contains('Cellier').should('be.visible').and('have.class', 'MuiAutocomplete-option').click();
+    //cy.get('.MuiButtonBase-root:nth-child(2) > [data-testid="ArrowDropDownIcon"] > path').click();
+    cy.get('#location').click();
+    cy.contains('Cellier').should('be.visible').and('have.class', 'MuiMenuItem-root').click();
 
-    cy.get('input#unit').click().type('bo');
-    cy.contains('boîte(s)')
-      .should('be.visible')
-      .and('have.class', 'MuiAutocomplete-option')
-      .click();
+    cy.get('#unit').click();
+    cy.contains('boîte(s)').should('be.visible').and('have.class', 'MuiMenuItem-root').click();
 
     cy.get('button#next').should('be.visible').should('not.be.disabled').click();
 
