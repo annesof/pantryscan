@@ -1,4 +1,5 @@
 import { Chip } from '@/components/Chip';
+import { Select } from '@/components/Select';
 import { GET_ALL_LOCATIONS, GET_ALL_UNITS } from '@/data/queries';
 import { Category, ContentUnit, Location } from '@/types';
 import { useQuery } from '@apollo/client';
@@ -25,12 +26,12 @@ export const CreateProductPreferences = ({
   categories,
 }: CreateProductPreferencesProps) => {
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>();
-  const [selectedUnit, setSelectedUnit] = useState<ContentUnit | null>();
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedUnit, setSelectedUnit] = useState('');
   const [errorForm, setErrorForm] = useState(true);
 
-  const { loading: loadingLocations, data: locations } = useQuery(GET_ALL_LOCATIONS);
-  const { loading: loadingUnits, data: units } = useQuery(GET_ALL_UNITS);
+  const { data: locations } = useQuery(GET_ALL_LOCATIONS);
+  const { data: units } = useQuery(GET_ALL_UNITS);
 
   const locationList: Location[] = locations?.findAllLocations || [];
   const unitList: ContentUnit[] = units?.findAllUnits || [];
@@ -50,9 +51,9 @@ export const CreateProductPreferences = ({
         variables: {
           categoryIds,
           userId: 1,
-          locationId: selectedLocation.id,
+          locationId: selectedLocation,
           productEan: ean,
-          contentUnitId: Number(selectedUnit.id),
+          contentUnitId: Number(selectedUnit),
         },
       });
     }
@@ -69,7 +70,6 @@ export const CreateProductPreferences = ({
         getOptionLabel={(option) => option.name}
         id="categories"
         options={categories}
-        disableCloseOnSelect
         sx={{ width: 300 }}
         renderTags={(value, getTagProps) =>
           value.map((option, index: number) => (
@@ -82,33 +82,37 @@ export const CreateProductPreferences = ({
             />
           ))
         }
-        renderInput={(params) => <TextField {...params} label="Categories" size="small" />}
-      />
-      <Autocomplete
-        getOptionLabel={(option) => option.name || ''}
-        id="location"
-        onChange={(_, newValue) => {
-          setSelectedLocation(newValue);
-        }}
-        options={locationList}
-        loading={loadingLocations}
-        sx={{ width: 300 }}
         renderInput={(params) => (
-          <TextField {...params} label="Emplacement habituel" size="small" />
+          <TextField
+            {...params}
+            label="Categories"
+            size="small"
+            variant="standard"
+            InputLabelProps={{ shrink: true }}
+          />
         )}
       />
 
-      <Autocomplete
-        getOptionLabel={(option) => option.name || ''}
+      <Select
+        id="location"
+        onChange={(event) => {
+          setSelectedLocation(event.target.value as string);
+        }}
+        options={locationList}
+        sx={{ width: 300 }}
+        label="Emplacement habituel"
+      />
+
+      <Select
         id="unit"
-        onChange={(_, newValue) => {
-          setSelectedUnit(newValue);
+        onChange={(event) => {
+          setSelectedUnit(event.target.value as string);
         }}
         options={unitList}
-        loading={loadingUnits}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Unité" size="small" />}
+        label="Type de contenant"
       />
+
       <Button
         id="next"
         variant="contained"

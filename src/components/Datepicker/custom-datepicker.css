@@ -54,6 +54,10 @@
   border-color: #fff;
 }
 
+.react-datepicker__triangle {
+  display: none;
+}
+
 .react-datepicker__triangle::before,
 .react-datepicker__triangle::after {
   border-top-color: #62af4a;

@@ -33,7 +33,7 @@ interface DialogProps {
   children?: ReactNode;
   id: string;
   action: {
-    name: string;
+    name?: string;
     Icon?: ElementType;
     handleAction?: () => void;
     label: string;

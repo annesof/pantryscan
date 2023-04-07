@@ -63,7 +63,7 @@ const themes: Record<Themes, ThemeOptions> = {
       primary: {
         main: '#62AF4A',
       },
-      color: '#111',
+      white: '#FFFFFF',
     },
   }),
 

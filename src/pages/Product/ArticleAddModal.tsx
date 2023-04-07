@@ -3,10 +3,11 @@ import { ADD_ARTICLES } from '@/data/mutations';
 import { GET_ALL_LOCATIONS, GET_PRODUCT_PREFERENCES_USER } from '@/data/queries';
 
 import { DatePicker } from '@/components/Datepicker/Datepicker';
+import { Select } from '@/components/Select';
 import { Location, UserProductPreferences } from '@/types';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-import { Autocomplete, Fab, Stack, TextField } from '@mui/material';
+import { Fab, Stack, TextField } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 
 interface Props {
@@ -15,9 +16,7 @@ interface Props {
 
 export const ArticleAddModal = ({ userProductPref }: Props) => {
   const [open, setOpen] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>(
-    userProductPref?.location || null,
-  );
+  const [selectedLocation, setSelectedLocation] = useState(userProductPref?.location.id);
   const [quantity, setQuantity] = useState<string>('');
   const [expDate, setExpDate] = useState<Date | null>(null);
 
@@ -39,7 +38,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
   });
 
   useEffect(() => {
-    userProductPref?.location && setSelectedLocation(userProductPref.location);
+    userProductPref?.location && setSelectedLocation(userProductPref.location.id);
     if (open) {
       getAllLocation();
     }
@@ -56,7 +55,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
       saveArticles({
         variables: {
           quantity: Number(quantity),
-          idLocation: selectedLocation.id,
+          idLocation: selectedLocation,
           eanProduct: userProductPref?.product.ean,
           idUser: 1,
           ...(expDate && { expirationDate: expDate }),
@@ -86,26 +85,21 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
         open={open}
         onClose={onClose}
         action={{
-          name: 'test',
           label: 'ok',
           handleAction: onSubmit,
           disabled: !quantity || selectedLocation === null,
         }}
       >
         <Stack spacing={3}>
-          <Autocomplete
-            getOptionLabel={(option) => option.name || ''}
+          <Select
             id="location"
-            onChange={(_, newValue) => {
-              setSelectedLocation(newValue);
+            onChange={(event) => {
+              setSelectedLocation(event.target.value as string);
             }}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
             options={locationList}
             value={selectedLocation}
             sx={{ width: '70%' }}
-            renderInput={(params) => (
-              <TextField {...params} label="Emplacement" size="small" variant="standard" />
-            )}
+            label="Emplacement"
           />
 
           <TextField
@@ -116,6 +110,9 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             sx={{ width: '70%' }}
             variant="standard"
             id="quantity"
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => setQuantity(e.target.value)}
             InputProps={{ sx: { fontSize: '0.9rem' } }}
           />
@@ -127,6 +124,7 @@ export const ArticleAddModal = ({ userProductPref }: Props) => {
             dateFormat="MM/yyyy"
             showMonthYearPicker
             showYearDropdown
+            width="70%"
             small={false}
           />
         </Stack>
