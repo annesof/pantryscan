@@ -23,7 +23,7 @@ export const Select = (props: SelectProps) => {
         sx={props.sx}
       >
         {props.options.map((item: { id: string | number; name: string }) => (
-          <MenuItem key={item.id} value={item.id}>
+          <MenuItem key={item.id} value={item.id} id={String(item.id)}>
             {item.name}
           </MenuItem>
         ))}

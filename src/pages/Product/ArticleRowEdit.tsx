@@ -145,7 +145,13 @@ export const ArticleRowEdit = forwardRef<HTMLDivElement, Props>(
           <WhiteIconButton onClick={onSubmit}>
             <CheckIcon fontSize="inherit" />
           </WhiteIconButton>
-          <WhiteIconButton onClick={() => setIdSelected(undefined)}>
+          <WhiteIconButton
+            onClick={() => {
+              setIdSelected(undefined);
+              setExpDate(expirationDate ? new Date(expirationDate) : null);
+              setQuantityLocal(quantity);
+            }}
+          >
             <ClearRoundedIcon fontSize="inherit" />
           </WhiteIconButton>
         </Grid>
