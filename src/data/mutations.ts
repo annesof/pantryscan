@@ -69,3 +69,29 @@ export const DELETE_ARTICLE = gql`
     deleteArticle(id: $id)
   }
 `;
+
+export const ADD_PERSONAL_PRODUCT_PREFERENCES = gql`
+  mutation createPersonalProductAndPreferences(
+    $productEan: String!
+    $locationId: String!
+    $userId: Float!
+    $contentUnitId: Float!
+    $categoryIds: String!
+    $name: String!
+    $imageSmallUrl: String!
+  ) {
+    createPersonalProductAndPreferences(
+      createPersonalProductUserProductSettingsInput: {
+        productEan: $productEan
+        locationId: $locationId
+        userId: $userId
+        contentUnitId: $contentUnitId
+        categoryIds: $categoryIds
+        name: $name
+        image: $imageSmallUrl
+      }
+    ) {
+      id
+    }
+  }
+`;

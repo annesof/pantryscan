@@ -48,7 +48,7 @@ export const ProductHeader = ({
           sx={{ '& span': { color: 'white' } }}
         >
           <img
-            src={product?.imageSmallUrl}
+            src={product?.imageSmallUrl || './noimage.png'}
             id="product_image"
             style={{ borderRadius: '10px', maxHeight: '85px', width: '95%', maxWidth: '85px' }}
           />

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const size = { width: '100%', height: '500px' };
+const size = { width: '100%', height: '300px' };
 
 interface BarcodeDetectorProps {
   onDetect: (barcode: string) => void;
@@ -36,7 +36,7 @@ export const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: Barcod
 
         //Initializes a barcode detector
         const detector = new (window as any).BarcodeDetector({
-          formats: ['ean_13'],
+          formats: ['ean_13', 'code_128'],
         });
 
         //Defines a recursive function to detect barcodes
@@ -67,7 +67,7 @@ export const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: Barcod
   }, [onDetect, onError]);
 
   return (
-    <div style={{ width: '95%', height: 'auto', margin: 0, padding: 20, boxSizing: 'border-box' }}>
+    <div style={{ width: '95%', height: '350px', margin: 0, padding: 20, boxSizing: 'border-box' }}>
       <video ref={videoRef} style={{ display: 'none' }} autoPlay />
       <canvas ref={canvasRef} style={{ ...canvasSize }} />
     </div>

@@ -103,3 +103,13 @@ export const GET_ALL_LOCATIONS = gql`
     }
   }
 `;
+
+export const GET_ALL_PERSONAL_PRODUCT = gql`
+  query findPersonalProducts($idUser: Float!) {
+    findPersonalProducts(idUser: $idUser) {
+      ean
+      name
+      imageSmallUrl
+    }
+  }
+`;

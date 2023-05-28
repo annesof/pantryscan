@@ -23,6 +23,11 @@ const routes: Routes = {
     path: '/search',
     title: 'Recherche',
   },
+  [Pages.Admin]: {
+    component: asyncComponentLoader(() => import('@/pages/Admin/Welcome')),
+    path: '/admin',
+    title: 'Admin',
+  },
   [Pages.NotFound]: {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),
     path: '*',

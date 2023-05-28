@@ -26,9 +26,9 @@ const FullSizeDecenteredFlexBox = styled(CenteredFlexBox)(({ theme }) => ({
   height: '100%',
 
   [theme.breakpoints.up('md')]: {
-    width: '70%',
+    width: '80%',
     marginRight: '300px',
-    marginLeft: '300px',
+    marginLeft: '200px',
     marginTop: '20px',
   },
   padding: '15px',
