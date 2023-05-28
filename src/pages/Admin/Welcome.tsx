@@ -14,7 +14,6 @@ import { Category, ContentUnit, Location, Product } from '@/types';
 import { useMutation, useQuery } from '@apollo/client';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import { DocumentLink } from './DocumentLink';
 import { PersonalProductList } from './PersonalProductList';
 import { Wheel } from './Wheel';
 
@@ -95,7 +94,6 @@ function Welcome() {
     <>
       <FullSizeDecenteredFlexBox flexDirection="column" sx={{ width: '85%', marginTop: 0 }}>
         <Block>
-          <DocumentLink rows={productList} />
           <Title>Ajout d un produit</Title>
           <Stack spacing={1}>
             <TextField

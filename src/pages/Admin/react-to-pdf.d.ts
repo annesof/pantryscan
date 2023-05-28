@@ -2,14 +2,14 @@ declare module 'react-to-pdf' {
   import { RefObject, ReactNode } from 'react';
 
   function ReactToPdf(
-    targetRef?: RefObject,
+    targetRef?: any,
     filename?: string,
     x?: number,
     y?: number,
     options?: object,
-    onComplete?: function,
-    scale: number,
-  ): ReactNode<{ toPdf: () => void; targetRef: MutableRefObject }>;
+    onComplete?: Function,
+    scale?: number,
+  ): JSX.Element;
 
   export = ReactToPdf;
 }
