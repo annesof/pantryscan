@@ -9,9 +9,9 @@ export const Barcode = ({ value }: { value: string }) => {
       JsBarcode(imgRef.current, value, {
         format: 'CODE128',
         width: 2,
-        height: 80,
+        height: 60,
         displayValue: true,
-        fontSize: 8,
+        fontSize: 15,
       });
     }
   }, [value]);

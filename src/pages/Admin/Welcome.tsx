@@ -15,7 +15,6 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { PersonalProductList } from './PersonalProductList';
-import { Wheel } from './Wheel';
 
 function Welcome() {
   const [name, setName] = useState<string>('');
@@ -192,6 +191,7 @@ function Welcome() {
                 { id: 7, name: 'Lapin' },
                 { id: 9, name: 'Colin' },
                 { id: 10, name: 'Cabillaud' },
+                { id: 11, name: 'Legume' },
               ]}
               sx={{ width: 300 }}
               label="Type"
@@ -217,7 +217,8 @@ function Welcome() {
           <Title>Produits</Title>
           <PersonalProductList rows={productList} />
         </Block>
-        <Wheel rows={productList} />
+
+        {/*<Wheel rows={productList} />*/}
       </FullSizeDecenteredFlexBox>
     </>
   );

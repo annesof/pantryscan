@@ -43,6 +43,7 @@
     "react-router-dom": "^6.10.0",
     "react-swipeable-views": "^0.14.0",
     "react-to-pdf": "^0.0.14",
+    "react-to-print": "^2.14.12",
     "recoil": "^0.7.7"
   },
   "devDependencies": {
