@@ -181,17 +181,18 @@ function Welcome() {
                 setSelectedType(event.target.value as number);
               }}
               options={[
-                { id: 1, name: 'Porc' },
-                { id: 2, name: 'Boeuf' },
-                { id: 3, name: 'Veau' },
-                { id: 4, name: 'Saumon' },
-                { id: 5, name: 'Canard' },
-                { id: 6, name: 'Poulet' },
-                { id: 8, name: 'Dinde' },
-                { id: 7, name: 'Lapin' },
-                { id: 9, name: 'Colin' },
-                { id: 10, name: 'Cabillaud' },
-                { id: 11, name: 'Legume' },
+                { id: '02', name: 'Boeuf' },
+                { id: '10', name: 'Cabillaud' },
+                { id: '05', name: 'Canard' },
+                { id: '09', name: 'Colin' },
+                { id: '12', name: 'Crevette' },
+                { id: '08', name: 'Dinde' },
+                { id: '01', name: 'Porc' },
+                { id: '07', name: 'Lapin' },
+                { id: '11', name: 'Legume' },
+                { id: '06', name: 'Poulet' },
+                { id: '04', name: 'Saumon' },
+                { id: '03', name: 'Veau' },
               ]}
               sx={{ width: 300 }}
               label="Type"
