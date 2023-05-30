@@ -36,7 +36,7 @@ export const BarcodeDetector = ({ canvasSize = size, onDetect, onError }: Barcod
 
         //Initializes a barcode detector
         const detector = new (window as any).BarcodeDetector({
-          formats: ['ean_13', 'code_128'],
+          formats: ['ean_13', 'code_128','ean_8'],
         });
 
         //Defines a recursive function to detect barcodes
