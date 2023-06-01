@@ -22,7 +22,7 @@ export const ProductLastList = () => {
   if (error) return <p>Error : {error.message}</p>;
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-      {data?.findProducts.map((product: Product) => (
+      {data?.findProducts.slice(-3).map((product: Product) => (
         <ProductRow key={product.ean} product={product} />
       ))}
     </Box>
